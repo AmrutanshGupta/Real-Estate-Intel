@@ -1,0 +1,153 @@
+{
+  "summary": {
+    "questions": 20,
+    "top1": 18,
+    "top3": 19,
+    "top1_pct": 90.0,
+    "top3_pct": 95.0,
+    "avg_latency_ms": 1268.7,
+    "p95_latency_ms": 1389.1
+  },
+  "questions": [
+    {
+      "query": "What are the nearby landmarks or attractions?",
+      "top1_pass": false,
+      "top3_pass": false,
+      "latency_ms": 1389.1,
+      "top_result": "ATTRACTIONS Mind rolling Monastery Clement Town, Dehradun Robber\u2019s Cave kms from Dehradun Bus Stand Tibetan Buddhist Temple Clement Town, Dehradun Malsi Deer Park Mussoorie Road, Dehradun Rajaji Natio"
+    },
+    {
+      "query": "What is the total area or size of the property?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1232.7,
+      "top_result": "61 62 Fact Sheet Type of building Commercial Leasable Area: 6,71,937 sq.ft. Sustainability IGBC Platinum Certi\ufb01ed for Green Building Standards Car Parking: 886 Common Amenities Landscaped Courtyard of"
+    },
+    {
+      "query": "What is the price or cost of the property?",
+      "top1_pass": false,
+      "top3_pass": true,
+      "latency_ms": 1233.8,
+      "top_result": "Open for business; In the heart of New Delhi Originally the headquarters of the $3B Max Group, Max House is located at the epicenter of the Secondary Business District of Delhi. Offering ~105,000 sq. "
+    },
+    {
+      "query": "How many bedrooms or BHK configuration does the property have?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1224.1,
+      "top_result": "4 spacious bedrooms Fully \ufb01tted modular kitchen Built in cabinetry and custom woodwork Sky court VRF system for HVAC Private garden car parking within premises Energy ef\ufb01cient LED lighting Generous ce"
+    },
+    {
+      "query": "What floor is the apartment on?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1237.3,
+      "top_result": "6th And 10th Floor Plan 7th And 11th Floor Plan 69 70"
+    },
+    {
+      "query": "What is the address or location of the project?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1237.1,
+      "top_result": "UK RERA Registration No. UKREP08170000001. Please refer to project details on the website of UKRERA www.ukrera.org.in Max Towers is owned by Max Towers Pvt. Ltd.(previously known as Wise Zone Builders"
+    },
+    {
+      "query": "What is the distance from the nearest metro station or railway station?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1436.5,
+      "top_result": "Ft.) located within walking distance from a metro station in the heart of New DelhL 5HDOW\\3OXV&RQFODYHDQG([FHOOHQFH$ZDUGV 'HVLJQ3URMHFWRIWKH<HDU 5HDOW\\3OXV&RQFODYHDQG([FHOOHQFH$ZDUGV &RPPHUFLDO3URMHFW"
+    },
+    {
+      "query": "What schools or educational institutions are nearby?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1381.8,
+      "top_result": "FAR ENOUGH, CLOSE ENOUGH. Max Super Speciality Hospital minutes 3.2 km Paci\ufb01c Mall minutes 3.8 km Malsi Reserve Forest minutes 4.6 km Antara Senior Living 15 minutes 6.8 km Welham Girls School 23 minu"
+    },
+    {
+      "query": "What hospitals or medical facilities are nearby?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1199.3,
+      "top_result": "Professional housekeeping services for all common areas Facility management support throughout the operational hours for six days a week Preventive maintenance and check of electrical points, shafts, "
+    },
+    {
+      "query": "What shopping malls or commercial areas are close?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1308.5,
+      "top_result": "61 62 Fact Sheet Type of building Commercial Leasable Area: 6,71,937 sq.ft. Sustainability IGBC Platinum Certi\ufb01ed for Green Building Standards Car Parking: 886 Common Amenities Landscaped Courtyard of"
+    },
+    {
+      "query": "What amenities does the project offer?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1225.9,
+      "top_result": "Emotional Wellbeing Max Square offers a healthy environment with amenities and activities that lets our occupants maintain a healthy work-life balance. Recreation Max Square combines work and play wit"
+    },
+    {
+      "query": "Is there parking available?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1381.4,
+      "top_result": "RESIDENCES Generous ceiling height of 10.5ft All residences have been designed to have their own private gardens Views from every residence have been carefully curated to capture the stunning natural "
+    },
+    {
+      "query": "What security features are provided?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1202.5,
+      "top_result": "features security cctv surveillance throughout common area and basement low e, high performance glass fully unitized aluminium curtain wall panel brick cladding facade air treatment latest 3 - tier tr"
+    },
+    {
+      "query": "Is there a swimming pool or recreational facilities?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1229.4,
+      "top_result": "Fitness Centre Sports League Our state-of-the-art \ufb01tness centre is aimed at improving health and productivity. Best-in-class trainers help curate and oversee a comprehensive solution towards the welln"
+    },
+    {
+      "query": "What green or environment-friendly features are present?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1218.9,
+      "top_result": "Designed Responsibly and Sustainably Green Building Max Square is IGBC Platinum Certi\ufb01ed for Green Building Standards including appropriate orientation, adequate walls and over deck insulation. Furthe"
+    },
+    {
+      "query": "What is the possession or handover date?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1235.4,
+      "top_result": "The yearly simple interest payable on IBMS shall be determined by the company as per the applicable rates on \u2018One Year\u2019 Fixed Deposit accepted by State Bank of India at the close of each \ufb01nancial year"
+    },
+    {
+      "query": "What is the RERA registration number?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1235.1,
+      "top_result": "For a visit to our experience centre and the site, contact us at +91- 95553 95222 info@maxestates.in www.maxtowers.com RERA registration: UPRERAPRJ12475 71 70 Max Towers Pvt. Ltd.(previously known as "
+    },
+    {
+      "query": "Who is the developer or builder of the project?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1243.7,
+      "top_result": "UK RERA Registration No. UKREP08170000001. Please refer to project details on the website of UKRERA www.ukrera.org.in Max Towers is owned by Max Towers Pvt. Ltd.(previously known as Wise Zone Builders"
+    },
+    {
+      "query": "What are the payment plan or financing options?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1237.8,
+      "top_result": "The yearly simple interest payable on IBMS shall be determined by the company as per the applicable rates on \u2018One Year\u2019 Fixed Deposit accepted by State Bank of India at the close of each \ufb01nancial year"
+    },
+    {
+      "query": "What is the maintenance charge or society fee?",
+      "top1_pass": true,
+      "top3_pass": true,
+      "latency_ms": 1284.4,
+      "top_result": "The yearly simple interest payable on IBMS shall be determined by the company as per the applicable rates on \u2018One Year\u2019 Fixed Deposit accepted by State Bank of India at the close of each \ufb01nancial year"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+venv
+frontend/node_modules
+data/*.pdf
+data/uploads/*.pdf
+faiss_index/*.faiss
+faiss_index/*.pkl
+app/__pycache__/
