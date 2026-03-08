@@ -4,14 +4,20 @@ class Config:
     PROJECT_NAME = "Real Estate Intel"
     VERSION      = "1.0.0"
 
-    # The heavy hitter: MPNet
+    # Embedding Model
     MODEL_NAME  = "sentence-transformers/all-mpnet-base-v2"
     EMBED_DIM   = 768
     MAX_SEQ_LEN = 384
 
+    # Chunking limits
     CHUNK_SIZE    = 250
     CHUNK_OVERLAP = 50
-    BATCH_SIZE    = 64  # GPU goes brrr
+    BATCH_SIZE    = 32  # Reduced to maintain stable VRAM usage
+
+    # Caching & Optimization Toggles
+    USE_QUERY_CACHE = True
+    MAX_CACHE_SIZE  = 1000
+    USE_RERANKER    = True  # Toggle to False if end-to-end latency > 50% target
 
     MAX_PDF_MB     = 50
     MIN_TEXT_CHARS = 50

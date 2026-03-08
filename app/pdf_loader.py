@@ -7,84 +7,49 @@ import fitz  # PyMuPDF
 from app.config import Config
 from app.logger import logger
 
+# Pre-compile regex patterns for faster execution during the cleaning loop
+_RE_ARTIFACTS = re.compile(r'[#\\|]{2,}')
+_RE_NULLS = re.compile(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]')
+_RE_SPACES = re.compile(r'\s+')
 
 def _clean_text(text):
-    """Remove font artifacts and normalize whitespace."""
-    # Remove repeated special chars from embedded font artifacts (##, \\, |||)
-    text = re.sub(r'[#\\|]{2,}', ' ', text)
-    # Remove null bytes and control characters
-    text = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]', '', text)
-    # Normalize multiple spaces and newlines into one space
-    text = re.sub(r'\s+', ' ', text)
-    # Remove lone single non-vowel characters (usually noise)
-    text = re.sub(r'\s[^aeiouAEIOU\s]\s', ' ', text)
+    text = _RE_ARTIFACTS.sub(' ', text)
+    text = _RE_NULLS.sub('', text)
+    text = _RE_SPACES.sub(' ', text)
     return text.strip()
 
+def _readability_score(text):
+    if not text:
+        return 0
+    printable = sum(1 for c in text if c.isprintable() and ord(c) < 256)
+    alpha = sum(1 for c in text if c.isalpha())
+    total = max(len(text), 1)
+    return (printable / total) * 0.4 + (alpha / total) * 0.6
 
 def _extract_page_text(page):
-    """
-    Try multiple extraction strategies and return the best result.
-
-    Real estate brochures often use embedded/custom fonts that scramble
-    raw text extraction. We try 4 methods and pick the most readable one.
-    """
-    results = []
-
-    # Method 1: Standard text extraction
-    text1 = page.get_text("text").strip()
-    results.append(text1)
-
-    # Method 2: HTML extraction — better at handling font mappings
-    html  = page.get_text("html")
-    text2 = re.sub(r'<[^>]+>', ' ', html)
-    text2 = re.sub(r'&nbsp;', ' ', text2)
-    text2 = re.sub(r'&#\d+;', '', text2)
-    text2 = re.sub(r'\s+', ' ', text2).strip()
-    results.append(text2)
-
-    # Method 3: Blocks extraction — reads text block by block in layout order
+    # FAST PASS: Standard extraction
+    text_fast = page.get_text("text").strip()
+    score_fast = _readability_score(text_fast)
+    
+    # Short-circuit: If standard extraction is highly readable, skip the heavy processing
+    if score_fast > 0.75:
+        return text_fast
+        
+    # FALLBACK: Layout-aware blocks extraction for complex brochure formatting
     blocks = page.get_text("blocks")
-    text3  = " ".join(
-        b[4].strip() for b in blocks
-        if b[4].strip() and len(b[4].strip()) > 2
-    )
-    results.append(text3)
-
-    # Method 4: Dict extraction — most granular, captures spans individually
-    data  = page.get_text("dict")
-    spans = []
-    for block in data.get("blocks", []):
-        for line in block.get("lines", []):
-            for span in line.get("spans", []):
-                t = span.get("text", "").strip()
-                if t:
-                    spans.append(t)
-    text4 = " ".join(spans)
-    results.append(text4)
-
-    # Score each result: prefer readable ASCII/Latin text over garbled symbols
-    def readability_score(text):
-        if not text:
-            return 0
-        printable = sum(1 for c in text if c.isprintable() and ord(c) < 256)
-        alpha     = sum(1 for c in text if c.isalpha())
-        total     = max(len(text), 1)
-        return (printable / total) * 0.4 + (alpha / total) * 0.6
-
-    best = max(results, key=readability_score)
-
-    # If even the best result is mostly garbage, skip the page entirely
-    if readability_score(best) < 0.3:
+    text_fallback = " ".join(b[4].strip() for b in blocks if b[4].strip() and len(b[4].strip()) > 2)
+    score_fallback = _readability_score(text_fallback)
+    
+    # Return the best viable option, or None if the page is entirely garbled
+    best_text = text_fallback if score_fallback > score_fast else text_fast
+    best_score = max(score_fast, score_fallback)
+    
+    if best_score < 0.3:
         return None
-
-    return best
-
+        
+    return best_text
 
 def load_pdf(file_path):
-    """
-    Extract text from a PDF, returning one dict per usable page.
-    Uses multi-strategy extraction to handle brochures with custom fonts.
-    """
     path = Path(file_path)
 
     if not path.exists():
@@ -93,7 +58,7 @@ def load_pdf(file_path):
 
     size_mb = os.path.getsize(path) / (1024 * 1024)
     if size_mb > Config.MAX_PDF_MB:
-        logger.warning(f"Skipping {path.name}: {size_mb:.1f} MB > {Config.MAX_PDF_MB} MB limit")
+        logger.warning(f"Skipping {path.name}: {size_mb:.1f} MB limits exceeded.")
         return None
 
     try:
@@ -113,7 +78,6 @@ def load_pdf(file_path):
             garbled += 1
             continue
 
-        # Clean artifacts before length check
         text = _clean_text(text)
 
         if len(text) < Config.MIN_TEXT_CHARS:
@@ -121,9 +85,9 @@ def load_pdf(file_path):
             continue
 
         pages.append({
-            "text":      text,
-            "page_num":  i + 1,
-            "source":    path.name,
+            "text": text,
+            "page_num": i + 1,
+            "source": path.name,
             "file_path": str(path),
         })
 
