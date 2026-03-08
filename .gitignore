@@ -5,5 +5,5 @@ data/uploads/*.pdf
 faiss_index/*.faiss
 faiss_index/*.pkl
 __pycache__/
-eval/report.json
+eval/*.json
 .env

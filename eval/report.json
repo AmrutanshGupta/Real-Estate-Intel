@@ -3,18 +3,18 @@
     "total_queries": 110,
     "metrics": {
       "recall_1": 69.0,
-      "recall_3": 78.0,
-      "mrr": 0.7445,
-      "ndcg": 0.5808,
-      "entity_coverage": 84.0,
-      "false_positive_rate": 0.0
+      "recall_3": 77.0,
+      "mrr": 0.7385,
+      "ndcg": 0.5638,
+      "entity_coverage": 83.0,
+      "false_positive_rate": 10.0
     },
     "latency_ms": {
-      "avg_embedding": 52.7,
-      "avg_retrieval": 0.7,
-      "avg_reranking": 642.5,
-      "avg_total": 869.2,
-      "p95_total": 1595.8
+      "avg_embedding": 52.9,
+      "avg_retrieval": 0.8,
+      "avg_reranking": 1715.0,
+      "avg_total": 2003.1,
+      "p95_total": 3155.1
     }
   },
   "questions": [
@@ -24,12 +24,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.6164,
+      "ndcg": 0.6399,
       "latency_ms": {
-        "embedding": 159.11,
-        "retrieval": 0.98,
-        "reranking": 637.83,
-        "total": 2675.1
+        "embedding": 166.1,
+        "retrieval": 1.56,
+        "reranking": 1971.89,
+        "total": 4559.76
       },
       "top_result": "222 RAJPUR, DEHRADUN 222 Rajpur offers high-design residences for a select few who prize quality and durability, and truly value their real-estate investment. Designed for discerning nature lovers, th"
     },
@@ -39,12 +39,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.6992,
+      "ndcg": 0.8539,
       "latency_ms": {
-        "embedding": 52.12,
+        "embedding": 48.13,
         "retrieval": 0.74,
-        "reranking": 742.07,
-        "total": 1227.9
+        "reranking": 1745.27,
+        "total": 2136.9
       },
       "top_result": "222 RAJPUR, DEHRADUN 222 Rajpur offers high-design residences for a select few who prize quality and durability, and truly value their real-estate investment. Designed for discerning nature lovers, th"
     },
@@ -56,10 +56,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 65.81,
-        "retrieval": 0.95,
-        "reranking": 597.96,
-        "total": 664.77
+        "embedding": 67.39,
+        "retrieval": 1.15,
+        "reranking": 1786.95,
+        "total": 2089.29
       },
       "top_result": "INTIMATE CONTACT WITH NATURE 222 Rajpur is a premier residential community located adjacent to the Malsi forest, on the most exclusive address in Dehradun. Spread across 5 acres, 222 Rajpur offers 22 "
     },
@@ -71,10 +71,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 54.81,
-        "retrieval": 0.67,
-        "reranking": 729.07,
-        "total": 1347.98
+        "embedding": 52.25,
+        "retrieval": 0.8,
+        "reranking": 1768.1,
+        "total": 4180.65
       },
       "top_result": "222 RAJPUR, DEHRADUN 222 Rajpur offers high-design residences for a select few who prize quality and durability, and truly value their real-estate investment. Designed for discerning nature lovers, th"
     },
@@ -84,12 +84,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.6399,
+      "ndcg": 0.6992,
       "latency_ms": {
-        "embedding": 51.96,
-        "retrieval": 0.61,
-        "reranking": 657.39,
-        "total": 1483.36
+        "embedding": 51.43,
+        "retrieval": 0.74,
+        "reranking": 1780.34,
+        "total": 2203.03
       },
       "top_result": "FAR ENOUGH, CLOSE ENOUGH. Max Super Speciality Hospital minutes 3.2 km Paci\ufb01c Mall minutes 3.8 km Malsi Reserve Forest minutes 4.6 km Antara Senior Living 15 minutes 6.8 km Welham Girls School 23 minu"
     },
@@ -101,10 +101,10 @@
       "mrr": 1.0,
       "ndcg": 0.8319,
       "latency_ms": {
-        "embedding": 49.12,
-        "retrieval": 0.65,
-        "reranking": 663.26,
-        "total": 713.07
+        "embedding": 50.87,
+        "retrieval": 0.78,
+        "reranking": 1930.47,
+        "total": 1982.17
       },
       "top_result": "Nestled in the natural embrace of the Malsi Reserve Forest, home to a verdant expanse of lychee orchards, and oriented to views of the Mussoorie Hills, 222 Rajpur offers all the amenities of a sophist"
     },
@@ -116,10 +116,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 51.65,
-        "retrieval": 0.71,
-        "reranking": 715.03,
-        "total": 767.45
+        "embedding": 50.37,
+        "retrieval": 0.82,
+        "reranking": 1804.07,
+        "total": 1855.32
       },
       "top_result": "Nestled in the natural embrace of the Malsi Reserve Forest, home to a verdant expanse of lychee orchards, and oriented to views of the Mussoorie Hills, 222 Rajpur offers all the amenities of a sophist"
     },
@@ -129,12 +129,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.6399,
+      "ndcg": 0.6992,
       "latency_ms": {
-        "embedding": 47.53,
-        "retrieval": 0.61,
-        "reranking": 717.31,
-        "total": 1784.37
+        "embedding": 47.67,
+        "retrieval": 0.73,
+        "reranking": 1776.93,
+        "total": 2882.29
       },
       "top_result": "Max Super Speciality Hospital 6 minutes | 3.2 km Paci\ufb01c Mall 8 minutes | 3.8 km Malsi Reserve Forest 9 minutes | 4.6 km Antara Senior Living 15 minutes | 6.8 km Welham Girls School 23 minutes | 10.2 k"
     },
@@ -143,30 +143,30 @@
       "is_negative": false,
       "recall_at_1": false,
       "recall_at_3": false,
-      "mrr": 0.25,
-      "ndcg": 0.1461,
+      "mrr": 0.2,
+      "ndcg": 0.1312,
       "latency_ms": {
-        "embedding": 48.31,
-        "retrieval": 0.6,
-        "reranking": 642.22,
-        "total": 691.35
+        "embedding": 50.22,
+        "retrieval": 0.68,
+        "reranking": 1816.57,
+        "total": 2149.48
       },
       "top_result": "222 Rajpur, Dehradun A gated community with ready to move in uniquely designed luxury villas abutting the Malsi Reserve Forest, and oriented to panoramic views of the Mussoorie Hills, in Dehradun. Vil"
     },
     {
       "query": "What is the built-up area and carpet area of a Townhouse at 222 Rajpur?",
       "is_negative": false,
-      "recall_at_1": false,
+      "recall_at_1": true,
       "recall_at_3": true,
-      "mrr": 0.5,
-      "ndcg": 0.5307,
+      "mrr": 1.0,
+      "ndcg": 0.4704,
       "latency_ms": {
-        "embedding": 72.99,
-        "retrieval": 1.01,
-        "reranking": 659.12,
-        "total": 733.18
+        "embedding": 72.7,
+        "retrieval": 1.18,
+        "reranking": 1811.29,
+        "total": 2065.62
       },
-      "top_result": "interior view RESIDENCES Max Estates presents an array of residences at 222 Rajpur townhouses, courtyard villas and forest villas. All residences are carefully planned to ensure a seamless \ufb02ow of spac"
+      "top_result": "4 spacious bedrooms Fully \ufb01tted modular kitchen Built in cabinetry and custom woodwork Sky court VRF system for HVAC Private garden car parking within premises Energy ef\ufb01cient LED lighting Generous ce"
     },
     {
       "query": "Does the Townhouse at 222 Rajpur include a sky court?",
@@ -176,27 +176,27 @@
       "mrr": 1.0,
       "ndcg": 0.6548,
       "latency_ms": {
-        "embedding": 51.29,
-        "retrieval": 0.64,
-        "reranking": 655.47,
-        "total": 909.57
+        "embedding": 46.27,
+        "retrieval": 0.75,
+        "reranking": 1815.7,
+        "total": 2068.37
       },
       "top_result": "TOWNHOUSE The Townhouse Residences are designed around a stunning double height sky court located in the heart of the residence, covered with a double glazed premium skylight. The sky court offers sca"
     },
     {
       "query": "What is the ceiling height in the Townhouse units at 222 Rajpur?",
       "is_negative": false,
-      "recall_at_1": false,
+      "recall_at_1": true,
       "recall_at_3": true,
-      "mrr": 0.5,
-      "ndcg": 0.2961,
+      "mrr": 1.0,
+      "ndcg": 0.3392,
       "latency_ms": {
-        "embedding": 55.54,
-        "retrieval": 0.8,
-        "reranking": 659.32,
-        "total": 715.71
+        "embedding": 51.19,
+        "retrieval": 0.83,
+        "reranking": 1648.21,
+        "total": 1887.17
       },
-      "top_result": "interior view RESIDENCES Max Estates presents an array of residences at 222 Rajpur townhouses, courtyard villas and forest villas. All residences are carefully planned to ensure a seamless \ufb02ow of spac"
+      "top_result": "4 spacious bedrooms Fully \ufb01tted modular kitchen Built in cabinetry and custom woodwork Sky court VRF system for HVAC Private garden 2 car parking within premises Energy ef\ufb01cient LED lighting Generous "
     },
     {
       "query": "How many parking spaces are provided with each Townhouse at 222 Rajpur?",
@@ -204,12 +204,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 1.0,
+      "ndcg": 0.4704,
       "latency_ms": {
-        "embedding": 63.72,
-        "retrieval": 0.93,
-        "reranking": 784.82,
-        "total": 849.52
+        "embedding": 64.0,
+        "retrieval": 1.07,
+        "reranking": 1835.58,
+        "total": 1900.86
       },
       "top_result": "interior view RESIDENCES Max Estates presents an array of residences at 222 Rajpur townhouses, courtyard villas and forest villas. All residences are carefully planned to ensure a seamless \ufb02ow of spac"
     },
@@ -221,10 +221,10 @@
       "mrr": 1.0,
       "ndcg": 0.786,
       "latency_ms": {
-        "embedding": 44.92,
-        "retrieval": 0.67,
-        "reranking": 628.07,
-        "total": 1493.44
+        "embedding": 46.09,
+        "retrieval": 0.84,
+        "reranking": 1588.17,
+        "total": 2513.63
       },
       "top_result": "13 19 11 12 FIRST FLOOR PLAN | COURTYARD VILLAS 10 Family Lounge 291 sq.ft. 19\u20193\u201d x 14\u2019 11 Study/Puja Room 54 sq.ft. 5\u201911\u201d x 9\u20191\u201d 12 Laundry 54 sq.ft. 6\u201911\u201d x 7\u20191\u201d 13 Bedroom 2 226 sq.ft. 13\u20194\u201d x 14\u2019 "
     },
@@ -234,12 +234,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.6164,
+      "ndcg": 0.786,
       "latency_ms": {
-        "embedding": 54.46,
-        "retrieval": 0.69,
-        "reranking": 582.35,
-        "total": 1347.69
+        "embedding": 51.6,
+        "retrieval": 0.87,
+        "reranking": 1655.51,
+        "total": 2428.66
       },
       "top_result": "13 19 18 17 10 11 12 14 15 16 FIRST FLOOR PLAN COURTYARD VILLAS 10 Family Lounge 291 sq.ft. 19\u20193\u201d 14\u2019 11 Study/Puja Room 54 sq.ft. 5\u201911\u201d 9\u20191\u201d 12 Laundry 54 sq.ft. 6\u201911\u201d 7\u20191\u201d 13 Bedroom 226 sq.ft. 13\u20194"
     },
@@ -249,12 +249,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.5531,
+      "ndcg": 0.4852,
       "latency_ms": {
-        "embedding": 48.35,
-        "retrieval": 0.62,
-        "reranking": 714.55,
-        "total": 990.94
+        "embedding": 50.18,
+        "retrieval": 0.75,
+        "reranking": 1770.78,
+        "total": 1822.03
       },
       "top_result": "interior view RESIDENCES Max Estates presents an array of residences at 222 Rajpur - townhouses, courtyard villas and forest villas. All residences are carefully planned to ensure a seamless \ufb02ow of sp"
     },
@@ -266,10 +266,10 @@
       "mrr": 1.0,
       "ndcg": 0.6548,
       "latency_ms": {
-        "embedding": 55.54,
-        "retrieval": 0.75,
-        "reranking": 598.67,
-        "total": 655.18
+        "embedding": 50.69,
+        "retrieval": 0.97,
+        "reranking": 1585.47,
+        "total": 1637.4
       },
       "top_result": "TERRACE | COURTYARD VILLAS 20 Lounge 207 sq.ft. 15\u20192\u201d x 14\u2019 21 Terrace 1171 sq.ft."
     },
@@ -281,10 +281,10 @@
       "mrr": 0.5,
       "ndcg": 0.5148,
       "latency_ms": {
-        "embedding": 46.41,
-        "retrieval": 0.64,
-        "reranking": 587.83,
-        "total": 936.17
+        "embedding": 48.94,
+        "retrieval": 0.78,
+        "reranking": 1751.08,
+        "total": 2391.7
       },
       "top_result": "INTIMATE CONTACT WITH NATURE 222 Rajpur is a premier residential community located adjacent to the Malsi forest, on the most exclusive address in Dehradun. Spread across 5 acres, 222 Rajpur offers 22 "
     },
@@ -296,10 +296,10 @@
       "mrr": 1.0,
       "ndcg": 0.6844,
       "latency_ms": {
-        "embedding": 66.74,
-        "retrieval": 0.93,
-        "reranking": 590.54,
-        "total": 894.12
+        "embedding": 70.33,
+        "retrieval": 1.13,
+        "reranking": 1750.37,
+        "total": 2173.95
       },
       "top_result": "T11 T12 T14 T15 C1 C2 T10 T9 T8 T7 T6 T5 T2 T3 T4 RAJPUR ROAD NOTE: THIS IS AN ARTIST RENDITION AND IS NOT TO SCALE. TENTATIVE SITE PLAN IS SUBJECT TO CHANGE. MASTE R PL A N 2 2 2 R AJ PUR, DE H RADUN"
     },
@@ -311,10 +311,10 @@
       "mrr": 0.5,
       "ndcg": 0.214,
       "latency_ms": {
-        "embedding": 46.26,
-        "retrieval": 0.6,
-        "reranking": 755.46,
-        "total": 921.6
+        "embedding": 45.67,
+        "retrieval": 0.69,
+        "reranking": 1645.58,
+        "total": 1835.42
       },
       "top_result": "222 Rajpur, Dehradun A gated community with ready to move in uniquely designed luxury villas abutting the Malsi Reserve Forest, and oriented to panoramic views of the Mussoorie Hills, in Dehradun. Vil"
     },
@@ -324,12 +324,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.6164,
+      "ndcg": 0.6399,
       "latency_ms": {
-        "embedding": 54.65,
-        "retrieval": 0.85,
-        "reranking": 656.87,
-        "total": 1365.37
+        "embedding": 56.53,
+        "retrieval": 0.98,
+        "reranking": 1743.42,
+        "total": 2468.35
       },
       "top_result": "bedroom, forest villas Uninterrupted view of Malsi Reserve Forest spacious bedrooms Private elevator Staff bedroom bathroom with separate entry Lower ground \ufb02oor with terraced garden Fully \ufb01tted modul"
     },
@@ -341,10 +341,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 53.91,
-        "retrieval": 0.49,
-        "reranking": 610.74,
-        "total": 665.33
+        "embedding": 48.39,
+        "retrieval": 1.03,
+        "reranking": 1853.05,
+        "total": 1902.72
       },
       "top_result": "INTIMATE CONTACT WITH NATURE 222 Rajpur is a premier residential community located adjacent to the Malsi forest, on the most exclusive address in Dehradun. Spread across 5 acres, 222 Rajpur offers 22 "
     },
@@ -354,29 +354,29 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 1.0,
+      "ndcg": 0.8688,
       "latency_ms": {
-        "embedding": 61.4,
-        "retrieval": 0.84,
-        "reranking": 723.94,
-        "total": 786.38
+        "embedding": 70.55,
+        "retrieval": 1.08,
+        "reranking": 1795.9,
+        "total": 1867.79
       },
       "top_result": "interior view RESIDENCES Max Estates presents an array of residences at 222 Rajpur - townhouses, courtyard villas and forest villas. All residences are carefully planned to ensure a seamless \ufb02ow of sp"
     },
     {
       "query": "Does 222 Rajpur offer power backup and uninterrupted water supply?",
       "is_negative": false,
-      "recall_at_1": true,
-      "recall_at_3": true,
-      "mrr": 1.0,
-      "ndcg": 0.3392,
+      "recall_at_1": false,
+      "recall_at_3": false,
+      "mrr": 0.2,
+      "ndcg": 0.1312,
       "latency_ms": {
-        "embedding": 52.66,
-        "retrieval": 0.72,
-        "reranking": 797.68,
-        "total": 851.11
+        "embedding": 52.34,
+        "retrieval": 0.74,
+        "reranking": 1786.83,
+        "total": 1840.1
       },
-      "top_result": "AMENITIES A haven of privacy, luxury and nature Immersion into the Malsi Reserve Forest Spectacular views of the Mussoorie Hills Exclusive entry from Rajpur Road Tree lined boulevards Terraced communi"
+      "top_result": "Nestled in the natural embrace of the Malsi Reserve Forest, home to a verdant expanse of lychee orchards, and oriented to views of the Mussoorie Hills, 222 Rajpur offers all the amenities of a sophist"
     },
     {
       "query": "Is there a private orchard at 222 Rajpur?",
@@ -386,10 +386,10 @@
       "mrr": 0.2,
       "ndcg": 0.1312,
       "latency_ms": {
-        "embedding": 44.68,
-        "retrieval": 0.57,
-        "reranking": 705.18,
-        "total": 966.04
+        "embedding": 47.44,
+        "retrieval": 0.66,
+        "reranking": 1647.8,
+        "total": 1696.15
       },
       "top_result": "INTIMATE CONTACT WITH NATURE 222 Rajpur is a premier residential community located adjacent to the Malsi forest, on the most exclusive address in Dehradun. Spread across 5 acres, 222 Rajpur offers 22 "
     },
@@ -399,12 +399,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.5087,
+      "ndcg": 0.5531,
       "latency_ms": {
-        "embedding": 70.64,
-        "retrieval": 1.48,
-        "reranking": 665.94,
-        "total": 2032.88
+        "embedding": 70.95,
+        "retrieval": 1.08,
+        "reranking": 1718.91,
+        "total": 4020.49
       },
       "top_result": "Design Nothing about this environment or experience is accidental. At a glance Located in Sector 16B, Noida, Max Towers commands direct access from the DND Flyway. Max Towers is walking distance from "
     },
@@ -416,27 +416,27 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 47.24,
-        "retrieval": 0.81,
-        "reranking": 653.39,
-        "total": 701.49
+        "embedding": 52.92,
+        "retrieval": 0.83,
+        "reranking": 1723.24,
+        "total": 1777.05
       },
       "top_result": "Design Nothing about this environment or experience is accidental. At a glance Located in Sector 16B, Noida, Max Towers commands direct access from the DND Flyway. Max Towers is walking distance from "
     },
     {
       "query": "What is the typical floor plate size at Max Towers?",
       "is_negative": false,
-      "recall_at_1": true,
+      "recall_at_1": false,
       "recall_at_3": true,
-      "mrr": 1.0,
-      "ndcg": 0.786,
+      "mrr": 0.5,
+      "ndcg": 0.4913,
       "latency_ms": {
-        "embedding": 45.82,
-        "retrieval": 0.68,
-        "reranking": 610.78,
-        "total": 657.34
+        "embedding": 45.86,
+        "retrieval": 0.77,
+        "reranking": 1609.9,
+        "total": 3273.43
       },
-      "top_result": "Design Nothing about this environment or experience is accidental. At a glance Located in Sector 16B, Noida, Max Towers commands direct access from the DND Flyway. Max Towers is walking distance from "
+      "top_result": "Tenant Floors Max Towers provides you with a state-of-the-art blank slate workspace that you can fully customise to suit your needs. Designed such that 90% of regular occupied space gets direct line-o"
     },
     {
       "query": "What is the floor-to-floor height at Max Towers?",
@@ -444,12 +444,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.6992,
+      "ndcg": 0.5531,
       "latency_ms": {
-        "embedding": 49.28,
-        "retrieval": 0.59,
-        "reranking": 555.62,
-        "total": 2631.26
+        "embedding": 46.39,
+        "retrieval": 0.71,
+        "reranking": 1600.1,
+        "total": 3475.87
       },
       "top_result": "Tenant Floors Max Towers provides you with a state-of-the-art blank slate workspace that you can fully customise to suit your needs. Designed such that 90% of regular occupied space gets direct line-o"
     },
@@ -461,10 +461,10 @@
       "mrr": 1.0,
       "ndcg": 0.5531,
       "latency_ms": {
-        "embedding": 43.19,
-        "retrieval": 0.53,
-        "reranking": 643.78,
-        "total": 1446.81
+        "embedding": 42.74,
+        "retrieval": 0.63,
+        "reranking": 1421.2,
+        "total": 1662.06
       },
       "top_result": "Max Towers is LEED Platinum Certi\ufb01ed. Max Towers is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is important to us because we feel a certain responsibili"
     },
@@ -476,10 +476,10 @@
       "mrr": 1.0,
       "ndcg": 0.3392,
       "latency_ms": {
-        "embedding": 43.03,
-        "retrieval": 0.54,
-        "reranking": 589.96,
-        "total": 633.58
+        "embedding": 43.86,
+        "retrieval": 0.58,
+        "reranking": 1429.07,
+        "total": 1473.76
       },
       "top_result": "Max Towers is LEED Platinum Certi\ufb01ed. Max Towers is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is important to us because we feel a certain responsibili"
     },
@@ -491,10 +491,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 58.23,
-        "retrieval": 0.77,
-        "reranking": 743.54,
-        "total": 802.59
+        "embedding": 55.6,
+        "retrieval": 0.91,
+        "reranking": 1781.23,
+        "total": 1837.81
       },
       "top_result": "Max Towers is LEED Platinum Certi\ufb01ed. Max Towers is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is important to us because we feel a certain responsibili"
     },
@@ -506,10 +506,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 58.6,
-        "retrieval": 0.79,
-        "reranking": 702.51,
-        "total": 761.96
+        "embedding": 53.51,
+        "retrieval": 0.92,
+        "reranking": 1579.46,
+        "total": 1633.96
       },
       "top_result": "Max Towers is LEED Platinum Certi\ufb01ed. Max Towers is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is important to us because we feel a certain responsibili"
     },
@@ -519,12 +519,12 @@
       "recall_at_1": false,
       "recall_at_3": true,
       "mrr": 0.5,
-      "ndcg": 0.2463,
+      "ndcg": 0.214,
       "latency_ms": {
-        "embedding": 42.72,
-        "retrieval": 0.54,
-        "reranking": 449.16,
-        "total": 492.48
+        "embedding": 43.04,
+        "retrieval": 0.61,
+        "reranking": 1655.55,
+        "total": 1867.25
       },
       "top_result": "The Box Max Towers o\ufb00ers a premium dining and recreation experience, open to residents and the outside world alike for everything from grocery shopping to lavish dinners; from a quick bite to a co\ufb00ee "
     },
@@ -536,10 +536,10 @@
       "mrr": 0.25,
       "ndcg": 0.1461,
       "latency_ms": {
-        "embedding": 46.73,
-        "retrieval": 0.63,
-        "reranking": 639.42,
-        "total": 1772.39
+        "embedding": 46.04,
+        "retrieval": 0.77,
+        "reranking": 1671.67,
+        "total": 3155.12
       },
       "top_result": "Max Towers is an attempt to provide you with an agile workplace that responds to work expansion and contraction with ease. collaborative spaces like co-working zones and a \ufb02exible multi-use dining are"
     },
@@ -551,10 +551,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 46.56,
-        "retrieval": 0.49,
-        "reranking": 498.98,
-        "total": 949.09
+        "embedding": 41.88,
+        "retrieval": 0.6,
+        "reranking": 1559.12,
+        "total": 1867.89
       },
       "top_result": "Professional housekeeping services for all common areas Facility management support throughout the operational hours for six days a week Preventive maintenance and check of electrical points, shafts, "
     },
@@ -564,12 +564,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.4704,
+      "ndcg": 0.5087,
       "latency_ms": {
-        "embedding": 47.59,
-        "retrieval": 0.63,
-        "reranking": 658.63,
-        "total": 706.89
+        "embedding": 49.11,
+        "retrieval": 0.73,
+        "reranking": 1653.3,
+        "total": 2358.39
       },
       "top_result": "Max Towers is LEED Platinum Certi\ufb01ed. Max Towers is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is important to us because we feel a certain responsibili"
     },
@@ -581,10 +581,10 @@
       "mrr": 0.5,
       "ndcg": 0.3601,
       "latency_ms": {
-        "embedding": 40.28,
-        "retrieval": 0.5,
-        "reranking": 515.91,
-        "total": 969.52
+        "embedding": 39.32,
+        "retrieval": 0.55,
+        "reranking": 1629.63,
+        "total": 2027.74
       },
       "top_result": "Above Entrance to Max Towers Facing page The Box at Max Towers 29 28"
     },
@@ -596,10 +596,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 44.65,
-        "retrieval": 0.67,
-        "reranking": 570.89,
-        "total": 1393.92
+        "embedding": 49.31,
+        "retrieval": 0.75,
+        "reranking": 1653.63,
+        "total": 2892.83
       },
       "top_result": "Location With the most prime location in Noida, Max Towers is poised to be a new business address in the National Capital Region. Strategically located with direct access and large frontage on the nor"
     },
@@ -609,12 +609,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.7654,
+      "ndcg": 0.8319,
       "latency_ms": {
-        "embedding": 46.46,
-        "retrieval": 0.68,
-        "reranking": 651.28,
-        "total": 698.48
+        "embedding": 48.65,
+        "retrieval": 0.78,
+        "reranking": 1653.18,
+        "total": 1702.68
       },
       "top_result": "Design Nothing about this environment or experience is accidental. At a glance Located in Sector 16B, Noida, Max Towers commands direct access from the DND Flyway. Max Towers is walking distance from "
     },
@@ -624,12 +624,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.6548,
+      "ndcg": 0.6399,
       "latency_ms": {
-        "embedding": 44.63,
-        "retrieval": 0.64,
-        "reranking": 705.35,
-        "total": 750.68
+        "embedding": 46.22,
+        "retrieval": 0.74,
+        "reranking": 1649.96,
+        "total": 2400.95
       },
       "top_result": "Our view of design goes beyond architectural \ufb02ourishes. Every design detail at Max Towers is as functional as it is aesthetically pleasing. The fa\u00e7ade\u2019s unique vertical-\ufb01n shading system responds, thr"
     },
@@ -641,10 +641,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 49.93,
-        "retrieval": 0.75,
-        "reranking": 654.81,
-        "total": 705.55
+        "embedding": 50.13,
+        "retrieval": 0.9,
+        "reranking": 1602.53,
+        "total": 1653.64
       },
       "top_result": "Our view of design goes beyond architectural \ufb02ourishes. Every design detail at Max Towers is as functional as it is aesthetically pleasing. The fa\u00e7ade\u2019s unique vertical-\ufb01n shading system responds, thr"
     },
@@ -656,10 +656,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 62.76,
-        "retrieval": 0.88,
-        "reranking": 618.88,
-        "total": 682.6
+        "embedding": 66.81,
+        "retrieval": 0.97,
+        "reranking": 1635.8,
+        "total": 1703.65
       },
       "top_result": "Tenant Floors Max Towers provides you with a state-of-the-art blank slate workspace that you can fully customise to suit your needs. Designed such that 90% of regular occupied space gets direct line-o"
     },
@@ -671,10 +671,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 67.72,
-        "retrieval": 0.96,
-        "reranking": 725.12,
-        "total": 793.86
+        "embedding": 69.67,
+        "retrieval": 1.06,
+        "reranking": 1716.89,
+        "total": 1787.69
       },
       "top_result": "Open for business; In the heart of New Delhi Originally the headquarters of the $3B Max Group, Max House is located at the epicenter of the Secondary Business District of Delhi. Offering ~105,000 sq. "
     },
@@ -686,10 +686,10 @@
       "mrr": 1.0,
       "ndcg": 0.8319,
       "latency_ms": {
-        "embedding": 47.54,
-        "retrieval": 0.64,
-        "reranking": 707.07,
-        "total": 755.3
+        "embedding": 45.91,
+        "retrieval": 0.71,
+        "reranking": 1654.84,
+        "total": 1701.58
       },
       "top_result": "Open for business; In the heart of New Delhi Originally the headquarters of the $3B Max Group, Max House is located at the epicenter of the Secondary Business District of Delhi. Offering ~105,000 sq. "
     },
@@ -701,10 +701,10 @@
       "mrr": 1.0,
       "ndcg": 0.786,
       "latency_ms": {
-        "embedding": 44.09,
-        "retrieval": 0.64,
-        "reranking": 626.28,
-        "total": 671.07
+        "embedding": 45.52,
+        "retrieval": 0.76,
+        "reranking": 1567.99,
+        "total": 1614.33
       },
       "top_result": "Open for business; In the heart of New Delhi Originally the headquarters of the $3B Max Group, Max House is located at the epicenter of the Secondary Business District of Delhi. Offering ~105,000 sq. "
     },
@@ -714,12 +714,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.7654,
+      "ndcg": 0.7227,
       "latency_ms": {
-        "embedding": 42.63,
-        "retrieval": 0.58,
-        "reranking": 604.69,
-        "total": 647.96
+        "embedding": 41.5,
+        "retrieval": 0.69,
+        "reranking": 1553.07,
+        "total": 1595.35
       },
       "top_result": "Open for business; In the heart of New Delhi Originally the headquarters of the $3B Max Group, Max House is located at the epicenter of the Secondary Business District of Delhi. Offering ~105,000 sq. "
     },
@@ -729,12 +729,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 1.0,
+      "ndcg": 0.8539,
       "latency_ms": {
-        "embedding": 58.17,
-        "retrieval": 0.68,
-        "reranking": 733.66,
-        "total": 792.57
+        "embedding": 56.86,
+        "retrieval": 0.82,
+        "reranking": 1967.15,
+        "total": 2024.89
       },
       "top_result": "vasant kunj 34 min, 14 km igi airport 38 min, 20 km gurugram 60 min, 30 km okhla nsic metro station min,. 3 km hauz khas metro station 15 min, km saket 20 min, km new delhi railway station 40 min, 16 "
     },
@@ -746,10 +746,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 46.78,
-        "retrieval": 0.58,
-        "reranking": 634.33,
-        "total": 681.75
+        "embedding": 47.73,
+        "retrieval": 0.7,
+        "reranking": 1790.32,
+        "total": 1838.81
       },
       "top_result": "vasant kunj 34 min, 14 km igi airport 38 min, 20 km gurugram 60 min, 30 km okhla nsic metro station 5 min,. 3 km hauz khas metro station 15 min, 7 km saket 20 min, 8 km new delhi railway station 40 mi"
     },
@@ -761,10 +761,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 48.41,
-        "retrieval": 0.66,
-        "reranking": 728.46,
-        "total": 777.74
+        "embedding": 47.02,
+        "retrieval": 0.75,
+        "reranking": 1886.83,
+        "total": 2332.9
       },
       "top_result": "qvo < qum nehru place minutes hauz khas 15 minutes nhpc chowk ( faridabad ) 20 minutes botanical garden ( noida ) 25 minutes terminal 1d ( airport ) 30 minutes mg road ( gurgaon ) 40 minutes jasola mi"
     },
@@ -774,12 +774,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.7227,
+      "ndcg": 0.8688,
       "latency_ms": {
-        "embedding": 45.7,
-        "retrieval": 0.7,
-        "reranking": 552.89,
-        "total": 599.35
+        "embedding": 46.54,
+        "retrieval": 0.83,
+        "reranking": 1653.69,
+        "total": 1898.08
       },
       "top_result": "The materials used to build each space have been carefully chosen to maintain a sense of luxury and balancing it with our high sustainability design standards. From unique glass bricks to terracotta b"
     },
@@ -789,14 +789,14 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 1.0,
+      "ndcg": 0.7227,
       "latency_ms": {
-        "embedding": 58.21,
-        "retrieval": 0.58,
-        "reranking": 646.13,
-        "total": 704.98
+        "embedding": 47.95,
+        "retrieval": 0.81,
+        "reranking": 1637.33,
+        "total": 1686.29
       },
-      "top_result": "Tenant Floors Max Towers provides you with a state-of-the-art blank slate workspace that you can fully customise to suit your needs. Designed such that 90% of regular occupied space gets direct line-o"
+      "top_result": "Open for business; In the heart of New Delhi Originally the headquarters of the $3B Max Group, Max House is located at the epicenter of the Secondary Business District of Delhi. Offering ~105,000 sq. "
     },
     {
       "query": "Does Max House use double-glazed windows?",
@@ -806,10 +806,10 @@
       "mrr": 1.0,
       "ndcg": 0.6131,
       "latency_ms": {
-        "embedding": 47.51,
-        "retrieval": 0.54,
-        "reranking": 631.74,
-        "total": 679.85
+        "embedding": 44.24,
+        "retrieval": 0.59,
+        "reranking": 1560.06,
+        "total": 1604.95
       },
       "top_result": "The materials used to build each space have been carefully chosen to maintain a sense of luxury and balancing it with our high sustainability design standards. From unique glass bricks to terracotta b"
     },
@@ -819,14 +819,14 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.7654,
+      "ndcg": 0.7227,
       "latency_ms": {
-        "embedding": 49.19,
-        "retrieval": 0.65,
-        "reranking": 647.9,
-        "total": 697.8
+        "embedding": 48.76,
+        "retrieval": 0.79,
+        "reranking": 1683.53,
+        "total": 1733.15
       },
-      "top_result": "Doctors, Counsellors & Chiropractors Max Group\u2019s history in healthcare has given us the advantage of being able to provide best-in-class mental, physical and spiritual wellbeing. Our chiropractic serv"
+      "top_result": "The Philosophy of biophilia and art work The natural world and different forms of art work has inspired not just poets and philosophers through human history, but also scientists and entrepreneurs. It"
     },
     {
       "query": "Is Max House LEED certified?",
@@ -834,12 +834,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.7227,
+      "ndcg": 0.6992,
       "latency_ms": {
-        "embedding": 42.06,
-        "retrieval": 0.44,
-        "reranking": 613.93,
-        "total": 656.49
+        "embedding": 41.24,
+        "retrieval": 0.55,
+        "reranking": 1624.84,
+        "total": 1666.86
       },
       "top_result": "Sustainability: LEED Gold Certified Max House is designed to be LEED Gold certified. Max House is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is importan"
     },
@@ -851,10 +851,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 45.42,
-        "retrieval": 0.52,
-        "reranking": 570.84,
-        "total": 1595.8
+        "embedding": 45.03,
+        "retrieval": 0.6,
+        "reranking": 1655.04,
+        "total": 1700.88
       },
       "top_result": "The materials used to build each space have been carefully chosen to maintain a sense of luxury and balancing it with our high sustainability design standards. From unique glass bricks to terracotta b"
     },
@@ -866,10 +866,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 54.01,
-        "retrieval": 0.73,
-        "reranking": 652.5,
-        "total": 1679.67
+        "embedding": 55.17,
+        "retrieval": 0.85,
+        "reranking": 1844.71,
+        "total": 2444.58
       },
       "top_result": "222 Rajpur, Dehradun A gated community with ready to move in uniquely designed luxury villas abutting the Malsi Reserve Forest, and oriented to panoramic views of the Mussoorie Hills, in Dehradun. Vil"
     },
@@ -881,10 +881,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 52.76,
-        "retrieval": 0.69,
-        "reranking": 722.76,
-        "total": 776.49
+        "embedding": 52.35,
+        "retrieval": 0.79,
+        "reranking": 1865.46,
+        "total": 3243.24
       },
       "top_result": "DISCLAIMER This brochure is an artistic representation of the building / project and is purely conceptual. Images used for spaces at Max Towers are artistic impressions for representational purposes o"
     },
@@ -894,12 +894,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 1.0,
+      "ndcg": 0.8304,
       "latency_ms": {
-        "embedding": 50.81,
-        "retrieval": 0.71,
-        "reranking": 568.32,
-        "total": 619.89
+        "embedding": 51.18,
+        "retrieval": 0.83,
+        "reranking": 1501.12,
+        "total": 1553.35
       },
       "top_result": "Sustainability: LEED Gold Certified Max House is designed to be LEED Gold certified. Max House is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is importan"
     },
@@ -909,12 +909,12 @@
       "recall_at_1": false,
       "recall_at_3": true,
       "mrr": 0.5,
-      "ndcg": 0.5296,
+      "ndcg": 0.6608,
       "latency_ms": {
-        "embedding": 50.27,
-        "retrieval": 0.75,
-        "reranking": 579.46,
-        "total": 630.77
+        "embedding": 48.58,
+        "retrieval": 0.84,
+        "reranking": 1529.45,
+        "total": 1579.08
       },
       "top_result": "Tenant Floors Max Towers provides you with a state-of-the-art blank slate workspace that you can fully customise to suit your needs. Designed such that 90% of regular occupied space gets direct line-o"
     },
@@ -924,12 +924,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.786,
+      "ndcg": 0.6399,
       "latency_ms": {
-        "embedding": 67.87,
+        "embedding": 72.95,
         "retrieval": 1.12,
-        "reranking": 610.6,
-        "total": 1027.29
+        "reranking": 1545.59,
+        "total": 1965.92
       },
       "top_result": "Open for business; In the heart of New Delhi Originally the headquarters of the $3B Max Group, Max House is located at the epicenter of the Secondary Business District of Delhi. Offering ~105,000 sq. "
     },
@@ -941,10 +941,10 @@
       "mrr": 1.0,
       "ndcg": 0.5531,
       "latency_ms": {
-        "embedding": 47.16,
-        "retrieval": 0.67,
-        "reranking": 583.17,
-        "total": 631.25
+        "embedding": 46.97,
+        "retrieval": 0.74,
+        "reranking": 1601.72,
+        "total": 2029.4
       },
       "top_result": "Open for business; In the heart of New Delhi Originally the headquarters of the $3B Max Group, Max House is located at the epicenter of the Secondary Business District of Delhi. Offering ~105,000 sq. "
     },
@@ -956,10 +956,10 @@
       "mrr": 1.0,
       "ndcg": 0.8304,
       "latency_ms": {
-        "embedding": 52.61,
-        "retrieval": 0.72,
-        "reranking": 635.73,
-        "total": 689.3
+        "embedding": 51.01,
+        "retrieval": 0.87,
+        "reranking": 1635.13,
+        "total": 1687.37
       },
       "top_result": "Location With the most prime location in Noida, Max Towers is poised to be a new business address in the National Capital Region. Strategically located with direct access and large frontage on the nor"
     },
@@ -971,10 +971,10 @@
       "mrr": 0.5,
       "ndcg": 0.214,
       "latency_ms": {
-        "embedding": 54.05,
-        "retrieval": 0.76,
-        "reranking": 651.73,
-        "total": 706.85
+        "embedding": 52.81,
+        "retrieval": 0.9,
+        "reranking": 1700.14,
+        "total": 1754.16
       },
       "top_result": "222 Rajpur, Dehradun A gated community with ready to move in uniquely designed luxury villas abutting the Malsi Reserve Forest, and oriented to panoramic views of the Mussoorie Hills, in Dehradun. Vil"
     },
@@ -986,10 +986,10 @@
       "mrr": 1.0,
       "ndcg": 0.5531,
       "latency_ms": {
-        "embedding": 56.25,
-        "retrieval": 0.75,
-        "reranking": 794.07,
-        "total": 851.3
+        "embedding": 59.5,
+        "retrieval": 0.87,
+        "reranking": 1808.38,
+        "total": 1869.14
       },
       "top_result": "Design Nothing about this environment or experience is accidental. At a glance Located in Sector 16B, Noida, Max Towers commands direct access from the DND Flyway. Max Towers is walking distance from "
     },
@@ -999,12 +999,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.5087,
+      "ndcg": 0.5531,
       "latency_ms": {
-        "embedding": 53.33,
-        "retrieval": 0.69,
-        "reranking": 559.03,
-        "total": 613.29
+        "embedding": 51.32,
+        "retrieval": 0.75,
+        "reranking": 1629.66,
+        "total": 1682.07
       },
       "top_result": "Sustainability: LEED Gold Certified Max House is designed to be LEED Gold certified. Max House is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is importan"
     },
@@ -1014,14 +1014,14 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.6367,
+      "ndcg": 0.8304,
       "latency_ms": {
-        "embedding": 57.27,
-        "retrieval": 0.77,
-        "reranking": 603.09,
-        "total": 661.19
+        "embedding": 57.61,
+        "retrieval": 0.93,
+        "reranking": 1782.52,
+        "total": 1841.32
       },
-      "top_result": "Our view of design goes beyond architectural \ufb02ourishes. Every design detail at Max Towers is as functional as it is aesthetically pleasing. The fa\u00e7ade\u2019s unique vertical-\ufb01n shading system responds, thr"
+      "top_result": "Max Towers is LEED Platinum Certi\ufb01ed. Max Towers is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is important to us because we feel a certain responsibili"
     },
     {
       "query": "Which property offers on-site wastewater treatment: Max Towers or Max House?",
@@ -1031,10 +1031,10 @@
       "mrr": 1.0,
       "ndcg": 0.3392,
       "latency_ms": {
-        "embedding": 49.49,
-        "retrieval": 0.66,
-        "reranking": 569.67,
-        "total": 970.89
+        "embedding": 52.39,
+        "retrieval": 0.77,
+        "reranking": 1644.51,
+        "total": 1698.04
       },
       "top_result": "Max Towers is LEED Platinum Certi\ufb01ed. Max Towers is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is important to us because we feel a certain responsibili"
     },
@@ -1046,10 +1046,10 @@
       "mrr": 1.0,
       "ndcg": 0.3392,
       "latency_ms": {
-        "embedding": 51.88,
-        "retrieval": 0.64,
-        "reranking": 572.42,
-        "total": 625.16
+        "embedding": 52.88,
+        "retrieval": 0.78,
+        "reranking": 1725.53,
+        "total": 1779.58
       },
       "top_result": "Max Towers is LEED Platinum Certi\ufb01ed. Max Towers is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is important to us because we feel a certain responsibili"
     },
@@ -1059,12 +1059,12 @@
       "recall_at_1": false,
       "recall_at_3": true,
       "mrr": 0.5,
-      "ndcg": 0.5296,
+      "ndcg": 0.3836,
       "latency_ms": {
-        "embedding": 58.22,
-        "retrieval": 0.83,
-        "reranking": 713.2,
-        "total": 991.14
+        "embedding": 60.0,
+        "retrieval": 1.0,
+        "reranking": 1842.48,
+        "total": 2123.94
       },
       "top_result": "Site of\ufb01ce 222 Rajpur Road Dehradun 248009 Uttarakhand 8899118222 E sales@maxestates.in www.222rajpur.co.in Corporate of\ufb01ce Max Towers, L-15, C-001/A, Sector 16B, Noida 201 301 0120 4743222 www.maxest"
     },
@@ -1074,12 +1074,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.4704,
+      "ndcg": 0.3392,
       "latency_ms": {
-        "embedding": 53.09,
-        "retrieval": 0.66,
-        "reranking": 579.1,
-        "total": 633.09
+        "embedding": 56.49,
+        "retrieval": 0.75,
+        "reranking": 1416.87,
+        "total": 1530.45
       },
       "top_result": "Spaces Max House will provide accessible and multifunctional spaces that are both indoors and outdoors, including various decompression zones for people to relax and meditate. The tenant floors have a"
     },
@@ -1091,10 +1091,10 @@
       "mrr": 1.0,
       "ndcg": 0.5531,
       "latency_ms": {
-        "embedding": 66.1,
-        "retrieval": 1.03,
-        "reranking": 678.2,
-        "total": 745.39
+        "embedding": 66.04,
+        "retrieval": 1.06,
+        "reranking": 2060.12,
+        "total": 2127.29
       },
       "top_result": "interior view RESIDENCES Max Estates presents an array of residences at 222 Rajpur townhouses, courtyard villas and forest villas. All residences are carefully planned to ensure a seamless \ufb02ow of spac"
     },
@@ -1106,10 +1106,10 @@
       "mrr": 1.0,
       "ndcg": 0.786,
       "latency_ms": {
-        "embedding": 64.96,
-        "retrieval": 0.95,
-        "reranking": 602.0,
-        "total": 870.96
+        "embedding": 68.23,
+        "retrieval": 1.3,
+        "reranking": 1805.81,
+        "total": 1875.64
       },
       "top_result": "Design Nothing about this environment or experience is accidental. At a glance Located in Sector 16B, Noida, Max Towers commands direct access from the DND Flyway. Max Towers is walking distance from "
     },
@@ -1121,10 +1121,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 57.97,
-        "retrieval": 0.81,
-        "reranking": 676.29,
-        "total": 735.14
+        "embedding": 62.68,
+        "retrieval": 0.97,
+        "reranking": 1724.26,
+        "total": 1787.97
       },
       "top_result": "Open for business; In the heart of New Delhi Originally the headquarters of the $3B Max Group, Max House is located at the epicenter of the Secondary Business District of Delhi. Offering ~105,000 sq. "
     },
@@ -1136,10 +1136,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 57.07,
-        "retrieval": 0.87,
-        "reranking": 661.79,
-        "total": 719.94
+        "embedding": 62.95,
+        "retrieval": 1.01,
+        "reranking": 1852.58,
+        "total": 1916.76
       },
       "top_result": "INTIMATE CONTACT WITH NATURE 222 Rajpur is a premier residential community located adjacent to the Malsi forest, on the most exclusive address in Dehradun. Spread across 5 acres, 222 Rajpur offers 22 "
     },
@@ -1149,12 +1149,12 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.6992,
+      "ndcg": 0.7227,
       "latency_ms": {
-        "embedding": 61.21,
-        "retrieval": 0.82,
-        "reranking": 567.53,
-        "total": 1404.86
+        "embedding": 63.15,
+        "retrieval": 0.93,
+        "reranking": 1778.99,
+        "total": 2490.32
       },
       "top_result": "We view the workplace as a strategic asset and a catalyst for cultural change. Max Towers is a next-generation o\ufb03ce building: providing an on-demand, community-enabled, and experience-driven work envi"
     },
@@ -1166,10 +1166,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 57.72,
-        "retrieval": 0.95,
-        "reranking": 734.26,
-        "total": 792.99
+        "embedding": 59.42,
+        "retrieval": 1.15,
+        "reranking": 1979.44,
+        "total": 2040.08
       },
       "top_result": "Location With the most prime location in Noida, Max Towers is poised to be a new business address in the National Capital Region. Strategically located with direct access and large frontage on the nor"
     },
@@ -1181,10 +1181,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 54.82,
-        "retrieval": 0.75,
-        "reranking": 740.65,
-        "total": 796.45
+        "embedding": 54.3,
+        "retrieval": 0.82,
+        "reranking": 1767.49,
+        "total": 1823.02
       },
       "top_result": "Site of\ufb01ce 222 Rajpur Road Dehradun 248009 Uttarakhand 8899118222 E sales@maxestates.in www.222rajpur.co.in Corporate of\ufb01ce Max Towers, L-15, C-001/A, Sector 16B, Noida 201 301 0120 4743222 www.maxest"
     },
@@ -1194,14 +1194,14 @@
       "recall_at_1": true,
       "recall_at_3": true,
       "mrr": 1.0,
-      "ndcg": 0.8688,
+      "ndcg": 0.7227,
       "latency_ms": {
-        "embedding": 51.84,
-        "retrieval": 0.76,
-        "reranking": 549.25,
-        "total": 601.9
+        "embedding": 53.11,
+        "retrieval": 0.86,
+        "reranking": 1418.36,
+        "total": 1472.65
       },
-      "top_result": "Sustainability: LEED Gold Certified Max House is designed to be LEED Gold certified. Max House is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is importan"
+      "top_result": "Max Towers is LEED Platinum Certi\ufb01ed. Max Towers is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is important to us because we feel a certain responsibili"
     },
     {
       "query": "I need a property with daycare facilities \u2014 which of these three properties provides that?",
@@ -1211,10 +1211,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 52.95,
+        "embedding": 55.42,
         "retrieval": 0.89,
-        "reranking": 669.84,
-        "total": 723.74
+        "reranking": 1806.58,
+        "total": 1862.97
       },
       "top_result": ""
     },
@@ -1226,10 +1226,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 52.14,
-        "retrieval": 0.77,
-        "reranking": 653.21,
-        "total": 706.18
+        "embedding": 51.1,
+        "retrieval": 0.89,
+        "reranking": 1614.91,
+        "total": 1666.97
       },
       "top_result": ""
     },
@@ -1241,10 +1241,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 49.8,
-        "retrieval": 0.79,
-        "reranking": 614.49,
-        "total": 665.14
+        "embedding": 48.86,
+        "retrieval": 0.81,
+        "reranking": 1704.96,
+        "total": 1754.69
       },
       "top_result": ""
     },
@@ -1256,10 +1256,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 48.22,
-        "retrieval": 0.7,
-        "reranking": 590.55,
-        "total": 639.52
+        "embedding": 49.87,
+        "retrieval": 0.82,
+        "reranking": 1886.52,
+        "total": 1937.27
       },
       "top_result": "INTIMATE CONTACT WITH NATURE 222 Rajpur is a premier residential community located adjacent to the Malsi forest, on the most exclusive address in Dehradun. Spread across acres, 222 Rajpur offers 22 be"
     },
@@ -1271,10 +1271,10 @@
       "mrr": 1.0,
       "ndcg": 0.8304,
       "latency_ms": {
-        "embedding": 56.83,
-        "retrieval": 0.8,
-        "reranking": 537.02,
-        "total": 897.53
+        "embedding": 53.55,
+        "retrieval": 0.88,
+        "reranking": 1687.17,
+        "total": 1741.82
       },
       "top_result": "Sustainability: LEED Gold Certified Max House is designed to be LEED Gold certified. Max House is a thought leader in sustainability and aims to minimise its ecological footprint. To do so is importan"
     },
@@ -1286,10 +1286,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 54.31,
-        "retrieval": 0.74,
-        "reranking": 689.65,
-        "total": 744.76
+        "embedding": 56.33,
+        "retrieval": 0.9,
+        "reranking": 1660.62,
+        "total": 1717.92
       },
       "top_result": ""
     },
@@ -1301,10 +1301,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 49.85,
-        "retrieval": 0.55,
-        "reranking": 642.86,
-        "total": 693.33
+        "embedding": 45.33,
+        "retrieval": 0.63,
+        "reranking": 1794.76,
+        "total": 1840.78
       },
       "top_result": ""
     },
@@ -1316,10 +1316,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 50.72,
-        "retrieval": 0.7,
-        "reranking": 654.07,
-        "total": 705.55
+        "embedding": 48.29,
+        "retrieval": 0.79,
+        "reranking": 1725.35,
+        "total": 1774.49
       },
       "top_result": "sorting and storage premium [UNK] ce location edge of south delhi panoramic view of yamuna banks corner site on a 60 m wide road over 200 m frontage on the national highway walking distance from metro"
     },
@@ -1331,10 +1331,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 49.61,
-        "retrieval": 0.67,
-        "reranking": 663.57,
-        "total": 713.91
+        "embedding": 47.76,
+        "retrieval": 0.82,
+        "reranking": 1647.22,
+        "total": 1695.87
       },
       "top_result": "Ft.) located within walking distance from a metro station in the heart of New DelhL 5HDOW\\3OXV&RQFODYHDQG([FHOOHQFH$ZDUGV 'HVLJQ3URMHFWRIWKH<HDU 5HDOW\\3OXV&RQFODYHDQG([FHOOHQFH$ZDUGV &RPPHUFLDO3URMHFW"
     },
@@ -1346,10 +1346,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 59.21,
-        "retrieval": 0.72,
-        "reranking": 756.71,
-        "total": 816.71
+        "embedding": 59.3,
+        "retrieval": 0.86,
+        "reranking": 1998.03,
+        "total": 2058.25
       },
       "top_result": "qvo < qum nehru place minutes hauz khas 15 minutes nhpc chowk ( faridabad ) 20 minutes botanical garden ( noida ) 25 minutes terminal 1d ( airport ) 30 minutes mg road ( gurgaon ) 40 minutes jasola mi"
     },
@@ -1358,13 +1358,13 @@
       "is_negative": false,
       "recall_at_1": false,
       "recall_at_3": false,
-      "mrr": 0.25,
-      "ndcg": 0.1461,
+      "mrr": 0.0,
+      "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 71.9,
-        "retrieval": 1.04,
-        "reranking": 573.2,
-        "total": 646.38
+        "embedding": 64.8,
+        "retrieval": 1.13,
+        "reranking": 1685.47,
+        "total": 1751.79
       },
       "top_result": "UK RERA Registration No. UKREP08170000001. Please refer to project details on the website of UKRERA www.ukrera.org.in Max Towers is owned by : Max Towers Pvt. Ltd.(previously known as Wise Zone Builde"
     },
@@ -1376,10 +1376,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 56.1,
-        "retrieval": 0.84,
-        "reranking": 701.87,
-        "total": 758.87
+        "embedding": 54.4,
+        "retrieval": 1.0,
+        "reranking": 1691.98,
+        "total": 1747.45
       },
       "top_result": ""
     },
@@ -1391,10 +1391,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 56.17,
-        "retrieval": 0.7,
-        "reranking": 666.35,
-        "total": 723.27
+        "embedding": 50.43,
+        "retrieval": 0.85,
+        "reranking": 2019.67,
+        "total": 2071.02
       },
       "top_result": ""
     },
@@ -1406,10 +1406,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 43.14,
-        "retrieval": 0.52,
-        "reranking": 644.95,
-        "total": 688.67
+        "embedding": 42.8,
+        "retrieval": 0.6,
+        "reranking": 1822.64,
+        "total": 1866.13
       },
       "top_result": ""
     },
@@ -1421,10 +1421,10 @@
       "mrr": 1.0,
       "ndcg": 1.0,
       "latency_ms": {
-        "embedding": 48.3,
-        "retrieval": 0.6,
-        "reranking": 593.71,
-        "total": 642.66
+        "embedding": 50.66,
+        "retrieval": 0.79,
+        "reranking": 1675.5,
+        "total": 1727.02
       },
       "top_result": "Decompression Spaces Relaxation is inextricably linked to wellness. Our decompression spaces allow occupants to take short breaks from their overstimulating lives. An easy, e\ufb00ective way to boost alert"
     },
@@ -1436,10 +1436,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 56.13,
-        "retrieval": 0.71,
-        "reranking": 510.17,
-        "total": 567.07
+        "embedding": 51.88,
+        "retrieval": 0.89,
+        "reranking": 1502.31,
+        "total": 1555.14
       },
       "top_result": ""
     },
@@ -1451,10 +1451,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 44.12,
-        "retrieval": 0.58,
-        "reranking": 635.51,
-        "total": 680.26
+        "embedding": 46.27,
+        "retrieval": 0.73,
+        "reranking": 1787.67,
+        "total": 1834.74
       },
       "top_result": ""
     },
@@ -1466,10 +1466,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 46.87,
-        "retrieval": 0.64,
-        "reranking": 608.83,
-        "total": 656.4
+        "embedding": 50.88,
+        "retrieval": 0.87,
+        "reranking": 1894.97,
+        "total": 1946.78
       },
       "top_result": ""
     },
@@ -1481,10 +1481,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 41.48,
-        "retrieval": 0.6,
-        "reranking": 611.38,
-        "total": 653.53
+        "embedding": 42.36,
+        "retrieval": 0.75,
+        "reranking": 1680.36,
+        "total": 1723.54
       },
       "top_result": ""
     },
@@ -1496,10 +1496,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 42.36,
-        "retrieval": 0.54,
-        "reranking": 575.6,
-        "total": 618.54
+        "embedding": 43.1,
+        "retrieval": 0.63,
+        "reranking": 1497.0,
+        "total": 1540.8
       },
       "top_result": ""
     },
@@ -1511,12 +1511,12 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 44.5,
-        "retrieval": 0.6,
-        "reranking": 539.86,
-        "total": 585.01
+        "embedding": 44.9,
+        "retrieval": 0.76,
+        "reranking": 1556.33,
+        "total": 1602.05
       },
-      "top_result": ""
+      "top_result": "Tenant Floors Max Towers provides you with a state-of-the-art blank slate workspace that you can fully customise to suit your needs. Designed such that 90% of regular occupied space gets direct line-o"
     },
     {
       "query": "Which property has a shopping mall attached to it?",
@@ -1526,10 +1526,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 44.23,
-        "retrieval": 0.61,
-        "reranking": 720.42,
-        "total": 765.33
+        "embedding": 44.74,
+        "retrieval": 0.74,
+        "reranking": 1985.15,
+        "total": 2030.71
       },
       "top_result": ""
     },
@@ -1541,10 +1541,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 47.99,
-        "retrieval": 0.61,
-        "reranking": 636.79,
-        "total": 685.44
+        "embedding": 50.95,
+        "retrieval": 0.74,
+        "reranking": 1725.95,
+        "total": 1777.7
       },
       "top_result": ""
     },
@@ -1556,10 +1556,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 41.69,
-        "retrieval": 0.46,
-        "reranking": 636.27,
-        "total": 678.5
+        "embedding": 44.64,
+        "retrieval": 0.54,
+        "reranking": 1785.38,
+        "total": 1830.63
       },
       "top_result": ""
     },
@@ -1571,10 +1571,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 46.35,
-        "retrieval": 0.72,
-        "reranking": 718.94,
-        "total": 766.07
+        "embedding": 48.25,
+        "retrieval": 0.85,
+        "reranking": 1834.33,
+        "total": 1883.5
       },
       "top_result": ""
     },
@@ -1586,10 +1586,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 45.26,
-        "retrieval": 0.62,
-        "reranking": 579.02,
-        "total": 624.96
+        "embedding": 48.41,
+        "retrieval": 0.76,
+        "reranking": 1838.34,
+        "total": 1887.57
       },
       "top_result": ""
     },
@@ -1601,10 +1601,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 55.98,
-        "retrieval": 0.75,
-        "reranking": 629.57,
-        "total": 686.36
+        "embedding": 60.27,
+        "retrieval": 0.88,
+        "reranking": 1623.25,
+        "total": 1684.48
       },
       "top_result": ""
     },
@@ -1616,10 +1616,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 38.82,
-        "retrieval": 0.48,
-        "reranking": 569.63,
-        "total": 608.99
+        "embedding": 41.39,
+        "retrieval": 0.67,
+        "reranking": 1790.06,
+        "total": 1832.19
       },
       "top_result": ""
     },
@@ -1631,10 +1631,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 39.13,
-        "retrieval": 0.45,
-        "reranking": 671.36,
-        "total": 711.0
+        "embedding": 42.91,
+        "retrieval": 0.52,
+        "reranking": 1551.83,
+        "total": 1595.33
       },
       "top_result": ""
     },
@@ -1646,10 +1646,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 42.56,
-        "retrieval": 0.59,
-        "reranking": 707.22,
-        "total": 750.43
+        "embedding": 41.59,
+        "retrieval": 0.67,
+        "reranking": 1619.93,
+        "total": 1662.26
       },
       "top_result": ""
     },
@@ -1661,10 +1661,10 @@
       "mrr": 0.0,
       "ndcg": 0.0,
       "latency_ms": {
-        "embedding": 51.5,
-        "retrieval": 0.68,
-        "reranking": 698.29,
-        "total": 750.53
+        "embedding": 53.71,
+        "retrieval": 0.78,
+        "reranking": 1855.02,
+        "total": 1909.59
       },
       "top_result": ""
     }
