@@ -4,6 +4,7 @@ data/*.pdf
 data/uploads/*.pdf
 faiss_index/*.faiss
 faiss_index/*.pkl
+storage/*.pdf
 __pycache__/
 eval/*.json
 .env
