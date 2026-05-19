@@ -5,7 +5,9 @@ data/*.pdf
 faiss_index/*.faiss
 faiss_index/*.pkl
 storage/*
+!storage/.gitkeep
 indexes/*
+!indexes/.gitkeep
 eval/
 __pycache__/
 eval/*.json
