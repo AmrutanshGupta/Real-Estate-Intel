@@ -1,70 +1,108 @@
 import re
-from transformers import AutoTokenizer
-from app.config import Config
+import numpy as np
 
-_tokenizer = AutoTokenizer.from_pretrained(Config.MODEL_NAME, use_fast=True)
+
+# ---------------------------------------------------------------------------
+# Sentence splitter
+# ---------------------------------------------------------------------------
 
 def _split_sentences(text: str) -> list[str]:
+    """Split text into sentences, also breaking on bare newlines."""
     sentences = re.split(r'(?<=[.!?])\s+', text.strip())
     result = []
     for s in sentences:
         result.extend([p.strip() for p in s.split('\n') if p.strip()])
     return [s for s in result if len(s) > 3]
 
-def _make_chunk(sentences: list[str], page: dict, index: int, token_count: int) -> dict:
-    return {
-        "text":        " ".join(sentences),
-        "source":      page["source"],
-        "file_path":   page.get("file_path", ""),
-        "page_num":    page["page_num"],
-        "chunk_index": index,
-        "token_count": token_count,
-        "org_id":      page.get("org_id", "default"),
-        "doc_id":      page.get("doc_id", ""),
-    }
 
-def chunk_text(pages: list[dict]) -> list[dict]:
-    chunks = []
+# ---------------------------------------------------------------------------
+# Public API
+# ---------------------------------------------------------------------------
+
+def chunk_text(
+    pages: list[dict],
+    similarity_threshold: float = 0.45,
+    encode_fn=None,          # callable(list[str]) -> np.ndarray  — injected by SearchEngine
+) -> list[dict]:
+    """
+    Semantically chunk pages into variable-length chunks.
+
+    Parameters
+    ----------
+    pages               : list of page dicts with keys: text, source, page_num, …
+    similarity_threshold: cosine similarity below which a new chunk starts (0–1)
+    encode_fn           : a callable that encodes a list of strings to a numpy
+                          embedding matrix.  Injected by SearchEngine so we don't
+                          load a second copy of MiniLM.  Falls back to a bundled
+                          lightweight model only if None is passed (testing only).
+    """
+    if encode_fn is None:
+        # Lazy fallback — only reached in unit tests / standalone runs
+        from sentence_transformers import SentenceTransformer
+        _fallback = SentenceTransformer("all-MiniLM-L6-v2", device="cpu")
+        encode_fn = lambda sentences: _fallback.encode(sentences, convert_to_numpy=True)
+
+    chunks: list[dict] = []
+    chunk_index = 0
+
     for page in pages:
-        sentences = _split_sentences(page["text"])
-        if not sentences: continue
+        raw_text: str = page.get("text", "").strip()
+        if not raw_text:
+            continue
 
-        encoded_sents = [(sent, _tokenizer.encode(sent, add_special_tokens=False)) for sent in sentences]
-        current_sents  = []
-        current_tokens = 0
-        chunk_index    = 0
+        sentences = _split_sentences(raw_text)
+        if not sentences:
+            continue
 
-        for sent, tokens in encoded_sents:
-            sent_tokens = len(tokens)
-            
-            if sent_tokens > Config.CHUNK_SIZE:
-                if current_sents:
-                    chunks.append(_make_chunk([s[0] for s in current_sents], page, chunk_index, current_tokens))
-                    chunk_index   += 1
-                    current_sents  = []
-                    current_tokens = 0
+        base = {
+            "source":    page["source"],
+            "file_path": page.get("file_path", ""),
+            "page_num":  page["page_num"],
+            "org_id":    page.get("org_id", "default"),
+            "doc_id":    page.get("doc_id", ""),
+        }
 
-                for start in range(0, sent_tokens, Config.CHUNK_SIZE - Config.CHUNK_OVERLAP):
-                    end  = min(start + Config.CHUNK_SIZE, sent_tokens)
-                    text = _tokenizer.decode(tokens[start:end])
-                    chunks.append({
-                        "text": text, "source": page["source"], "file_path": page.get("file_path", ""),
-                        "page_num": page["page_num"], "chunk_index": chunk_index, "token_count": end - start,
-                        "org_id": page.get("org_id", "default"), "doc_id": page.get("doc_id", ""),
-                    })
-                    chunk_index += 1
-                continue
+        # ── Edge case: single sentence on the page ──────────────────────────
+        if len(sentences) == 1:
+            chunks.append({**base, "text": sentences[0], "chunk_index": chunk_index})
+            chunk_index += 1
+            continue
 
-            if current_tokens + sent_tokens > Config.CHUNK_SIZE and current_sents:
-                chunks.append(_make_chunk([s[0] for s in current_sents], page, chunk_index, current_tokens))
+        # ── Embed all sentences in one batch (cheap, uses engine's model) ───
+        embeddings = encode_fn(sentences)
+
+        # L2-normalise once so dot product == cosine similarity
+        norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
+        norms = np.where(norms == 0, 1.0, norms)          # avoid div-by-zero
+        embeddings = embeddings / norms
+
+        # ── Adjacent-sentence cosine similarities ───────────────────────────
+        similarities = (embeddings[:-1] * embeddings[1:]).sum(axis=1)  # vectorised
+
+        # ── Group into chunks on topic-boundary ─────────────────────────────
+        current: list[str] = [sentences[0]]
+
+        for i, sim in enumerate(similarities):
+            next_sentence = sentences[i + 1]
+            if sim < similarity_threshold:
+                # Topic changed → flush current chunk
+                chunks.append({
+                    **base,
+                    "text":        " ".join(current),
+                    "chunk_index": chunk_index,
+                })
                 chunk_index += 1
-                current_sents  = current_sents[-2:]
-                current_tokens = sum(s[1] for s in current_sents)
+                current = []
 
-            current_sents.append((sent, sent_tokens))
-            current_tokens += sent_tokens
+            current.append(next_sentence)
 
-        if current_sents:
-            chunks.append(_make_chunk([s[0] for s in current_sents], page, chunk_index, current_tokens))
-            
+        # Flush trailing sentences
+        if current:
+            chunks.append({
+                **base,
+                "text":        " ".join(current),
+                "chunk_index": chunk_index,
+            })
+            chunk_index += 1
+
     return chunks

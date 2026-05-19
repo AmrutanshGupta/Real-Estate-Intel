@@ -2,6 +2,7 @@ import os
 import re
 import time
 import shutil
+import asyncio
 from pathlib import Path
 from contextlib import asynccontextmanager
 
@@ -144,17 +145,19 @@ async def upload(
             continue
 
         doc_id = Path(f.filename).stem
-        pages  = load_document(str(dest), org_id=org_id, doc_id=doc_id)
+        
+        # ── CRITICAL FIX 1: Offload CPU-heavy PDF loading to background thread ──
+        pages = await asyncio.to_thread(load_document, str(dest), org_id=org_id, doc_id=doc_id)
 
         if not pages:
             results.append({"file": f.filename, "error": "No extractable text found."})
             dest.unlink(missing_ok=True)
             continue
 
-        stats = engine.ingest(pages)
+        # ── CRITICAL FIX 2: Await the new async ingest method ──
+        stats = await engine.ingest(pages)
         invalidate_db(org_id)   # force registry reload after index update
 
-        # ── CRITICAL FIX: Safe batch handling (continue instead of raise) ──
         if stats.get("chunks", 0) == 0:
             results.append({"file": f.filename, "error": "Text extracted, but no valid chunks generated."})
             dest.unlink(missing_ok=True)
@@ -202,7 +205,8 @@ async def search(
     if not engine.ready:
         raise HTTPException(status_code=400, detail="No documents indexed for this organization yet.")
 
-    result = engine.query(query, req.k)
+    # ── CRITICAL FIX 3: Await the async query method ──
+    result = await engine.query(query, req.k)
 
     if "error" in result:
         raise HTTPException(status_code=503, detail=result["error"])
@@ -284,11 +288,13 @@ async def delete_document(
             all_vecs  = cpu_index.reconstruct_n(0, cpu_index.ntotal)
             kept_vecs = np.array([all_vecs[i] for i in keep_ids], dtype="float32")
             kept_meta = [old_meta[i] for i in keep_ids]
-            engine.db.build(kept_vecs, kept_meta)
+            
+            # Offload heavy FAISS operations to thread
+            await asyncio.to_thread(engine.db.build, kept_vecs, kept_meta)
         else:
             engine.db.index    = None
             engine.db.metadata = {}
-            engine.db._persist()
+            await asyncio.to_thread(engine.db._persist)
             engine.ready = False
 
     except Exception as e:
@@ -297,7 +303,7 @@ async def delete_document(
 
     # Remove the stored file
     file_path = Path(Config.upload_dir(org_id)) / name
-    file_path.unlink(missing_ok=True)
+    await asyncio.to_thread(file_path.unlink, missing_ok=True)
 
     # Evict caches so next request gets fresh state
     invalidate_engine(org_id)

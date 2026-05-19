@@ -161,7 +161,6 @@ class VectorDB:
             bm25_scores = np.array(self.bm25.get_scores(tokens))
 
             if valid_ids:
-                # ── CRITICAL FIX: Cleaner boolean logic implementation ──
                 mask = np.zeros(len(bm25_scores), dtype=bool)
                 mask[list(valid_ids)] = True
                 bm25_scores[~mask] = 0.0
@@ -207,16 +206,11 @@ class VectorDB:
             "org_id":    self.org_id,
         }
 
-
 # ── Per-tenant registry ────────────────────────────────────────────────────────
-# Lazy-loads one VectorDB instance per org_id. Thread-safe.
-
 _registry:      dict[str, VectorDB] = {}
 _registry_lock: threading.Lock      = threading.Lock()
 
-
 def get_db(org_id: str) -> VectorDB:
-    """Return the cached VectorDB for an org, loading from disk if needed."""
     with _registry_lock:
         if org_id not in _registry:
             db = VectorDB(org_id)
@@ -224,11 +218,6 @@ def get_db(org_id: str) -> VectorDB:
             _registry[org_id] = db
         return _registry[org_id]
 
-
 def invalidate_db(org_id: str) -> None:
-    """
-    Evict the cached instance so the next call to get_db() reloads from disk.
-    Call this after a new document is indexed for the org.
-    """
     with _registry_lock:
         _registry.pop(org_id, None)

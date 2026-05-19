@@ -29,10 +29,7 @@ const Icons = {
   lock:      "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
 }
 
-// ── RRF Score Normalizer ───────────────────────────────────────────────
-const RRF_MAX = 1 / 60 + 1 / 60
-const normalizeRRF = (score) => Math.min((score / RRF_MAX) * 100, 100).toFixed(1)
-
+// ── CRITICAL FIX: Removed the normalizeRRF function ────────────────────
 const scoreTier = (pct) => {
   if (pct >= 75) return 'score-high'
   if (pct >= 45) return 'score-mid'
@@ -492,20 +489,17 @@ export default function App() {
           {/* ── Sidebar ── */}
           <aside className="sidebar glass-panel">
             <div className="brand">
-              {/* StarBorder replacing the glow-box class */}
               <StarBorder color="#f97316" speed="8s">
                 <div className="brand-icon"><Icon d={Icons.zap} size={20} /></div>
               </StarBorder>
               <span className="brand-name">IntelSpace</span>
             </div>
 
-            {/* #4 UI Class Dynamic Allocation */}
             <div className="tenant-badge mono">
               <span className={`status-dot ${getHeartbeatClass()}`} /> ORG: {org}
             </div>
 
             <nav className="nav" style={{ position: 'relative' }}>
-              {/* #8 Sidebar Absolute Target Slider Element */}
               <div 
                 className="nav-indicator" 
                 style={{ transform: `translateY(${activeIndex * 46}px)` }} 
@@ -548,7 +542,6 @@ export default function App() {
                     onSubmit={handleSearch}>
                     <div className="search-box glow-focus">
                       <Icon d={Icons.search} size={24} className="search-icon" />
-                      {/* #1 UI Reactive Input Field */}
                       <input
                         ref={inputRef}
                         className="search-input mono"
@@ -557,7 +550,6 @@ export default function App() {
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                       />
-                      {/* StarBorder implementation on the EXECUTE button */}
                       <StarBorder color="var(--brand)" speed="4s" thickness={1}>
                         <button type="submit" className="search-btn" disabled={loading || !query.trim()}>
                           {loading ? <span className="spinner" /> : 'EXECUTE'}
@@ -592,9 +584,9 @@ export default function App() {
                       </div>
                       <div className="results">
                         {results.map((r, i) => {
-                          const pct = parseFloat(normalizeRRF(r.score))
+                          // CRITICAL FIX: The backend now sends an exact percentage integer/float (e.g., 85.4)
+                          const pct = Number(r.score) || 0;
                           return (
-                            /* #5 Hardware Accelerated Stagger Delay Calculation */
                             <div 
                               className="result-card glass-panel staggered-card" 
                               key={i}
@@ -606,7 +598,6 @@ export default function App() {
                                 </div>
                                 <span className={`score-badge mono ${scoreTier(pct)}`}>
                                   ACC: {pct.toFixed(1)}%
-                                  {/* #7 Mini Score Badge Horizontal Fill Component */}
                                   <div className="score-badge-fill-bar" style={{ width: `${pct}%` }} />
                                 </span>
                               </div>
@@ -640,11 +631,9 @@ export default function App() {
                     <div className="upload-hint mono">[AWAITING .PDF OR .DOCX FILES]</div>
                   </div>
 
-                  {/* #6 Progress Status Tracker Segment Grid */}
                   {progress.length > 0 && (
                     <div className="doc-list" style={{ marginTop: '24px' }}>
                       {progress.map((p, i) => {
-                        // Compute standard chunk parsing fill sizes
                         const barWidth = p.status === 'done' ? 100 : p.status === 'error' ? 100 : 45
                         return (
                           <div key={i} className="doc-item glass-panel upload-progress-row">

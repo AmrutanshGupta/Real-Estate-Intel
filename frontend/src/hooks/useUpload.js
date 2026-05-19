@@ -11,14 +11,14 @@ export function useUpload(onSuccess, token = null) {
     setUploading(true);
     setError(null);
     
-    const currentBatch = files.map(f => ({ name: f.name, status: 'uploading' }));
+    const currentBatch = files.map(f => ({ name: f.name, status: 'uploading', message: null }));
     setProgress(currentBatch);
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const formData = new FormData();
       
-      // CRITICAL FIX: This must be 'files' (plural) to match FastAPI
+      // CRITICAL: Matches FastAPI 'files: list[UploadFile]'
       formData.append('files', file); 
 
       try {
@@ -30,12 +30,25 @@ export function useUpload(onSuccess, token = null) {
           body: formData
         });
 
-        if (!res.ok) throw new Error(`Ingestion failed for ${file.name}`);
+        const data = await res.json();
 
-        setProgress(prev => prev.map((p, idx) => idx === i ? { ...p, status: 'done' } : p));
+        if (!res.ok) {
+          // Capture HTTP level errors (e.g., 500 Internal Server Error)
+          throw new Error(data.detail || `Server error: ${res.status}`);
+        }
+
+        // Check if the backend API returned a specific file-level error inside the 200 OK response
+        const fileResult = data.files && data.files[0];
+        if (fileResult && fileResult.error) {
+           throw new Error(fileResult.error);
+        }
+
+        setProgress(prev => prev.map((p, idx) => idx === i ? { ...p, status: 'done', message: 'Success' } : p));
         
       } catch (err) {
-        setProgress(prev => prev.map((p, idx) => idx === i ? { ...p, status: 'error' } : p));
+        console.error(`Upload failed for ${file.name}:`, err);
+        // Display the actual error reason to the user on the UI
+        setProgress(prev => prev.map((p, idx) => idx === i ? { ...p, status: 'error', message: err.message } : p));
       }
     }
     

@@ -1,5 +1,6 @@
 import urllib.request
 import json
+import asyncio
 from datetime import datetime, timedelta, timezone
 import jwt
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -44,23 +45,29 @@ def get_current_tenant(credentials: HTTPAuthorizationCredentials = Depends(secur
 
 # ── Standard Login Route ──
 @auth_router.post("/login")
-def login(req: LoginRequest):
+async def login(req: LoginRequest):
     logger.info(f"Tenant authenticated via standard login: {req.org_id}")
     access_token = create_access_token(data={"sub": req.org_id})
     return {"access_token": access_token, "token_type": "bearer"}
 
+# ── Async Fetch Helper ──
+def _fetch_oauth_profile(req: urllib.request.Request) -> dict:
+    """Synchronous network call isolated for threading."""
+    with urllib.request.urlopen(req, timeout=10) as response:
+        return json.loads(response.read().decode("utf-8"))
+
 # ── OAuth Callback Route ──
 @auth_router.post("/oauth/callback")
-def oauth_callback(req: OAuthLoginRequest):
+async def oauth_callback(req: OAuthLoginRequest):
     user_email = None
     
     try:
         if req.provider == "google":
             url = f"{Config.GOOGLE_USERINFO_URL}?access_token={req.access_token}"
             request = urllib.request.Request(url)
-            with urllib.request.urlopen(request, timeout=10) as response:
-                profile = json.loads(response.read().decode("utf-8"))
-                user_email = profile.get("email")
+            # OPTIMIZATION: Offload blocking network call to thread
+            profile = await asyncio.to_thread(_fetch_oauth_profile, request)
+            user_email = profile.get("email")
                 
         elif req.provider == "github":
             request = urllib.request.Request(
@@ -70,9 +77,9 @@ def oauth_callback(req: OAuthLoginRequest):
                     "User-Agent": Config.PROJECT_NAME
                 }
             )
-            with urllib.request.urlopen(request, timeout=10) as response:
-                profile = json.loads(response.read().decode("utf-8"))
-                user_email = profile.get("email") or f"{profile.get('login')}@github.sys"
+            # OPTIMIZATION: Offload blocking network call to thread
+            profile = await asyncio.to_thread(_fetch_oauth_profile, request)
+            user_email = profile.get("email") or f"{profile.get('login')}@github.sys"
         else:
             raise HTTPException(status_code=400, detail="Unsupported OAuth provider")
             
