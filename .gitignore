@@ -1,10 +1,12 @@
 venv
 frontend/node_modules
-data/*.pdf
 data/uploads/*.pdf
+data/*.pdf
 faiss_index/*.faiss
 faiss_index/*.pkl
-storage/*.pdf
+storage/*
+indexes/*
+eval/
 __pycache__/
 eval/*.json
 .env
