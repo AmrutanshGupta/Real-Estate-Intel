@@ -1,15 +1,14 @@
 import os
 import re
 import time
+import shutil
 from pathlib import Path
 from contextlib import asynccontextmanager
 
 os.environ.setdefault("OMP_NUM_THREADS", "1")
 
-import jwt
-from fastapi import FastAPI, UploadFile, File, HTTPException, Depends, Header
+from fastapi import FastAPI, UploadFile, File, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 
 from app.config import Config
@@ -17,6 +16,10 @@ from app.logger import logger
 from app.pdf_loader import load_document
 from app.search_engine import get_engine, invalidate_engine
 from app.vector_db import invalidate_db
+
+# ── New Production Architecture Imports ────────────────────────────────────────
+from app.db import init_db, history_collection
+from app.auth import auth_router, get_current_tenant
 
 
 # ── Security constants ─────────────────────────────────────────────────────────
@@ -30,62 +33,9 @@ _INJECTION_PATTERNS = [
     r"jailbreak",
 ]
 
-_bearer = HTTPBearer(auto_error=False)
-
-
-# ── Helpers ────────────────────────────────────────────────────────────────────
-
 def detect_injection(text: str) -> bool:
     t = text.lower()
     return any(re.search(p, t) for p in _INJECTION_PATTERNS)
-
-
-def create_token(org_id: str) -> str:
-    import datetime
-    payload = {
-        "org_id": org_id,
-        "sub":    org_id,
-        "exp":    datetime.datetime.utcnow()
-                  + datetime.timedelta(minutes=Config.JWT_EXPIRE_MINS),
-    }
-    return jwt.encode(payload, Config.JWT_SECRET, algorithm=Config.JWT_ALGORITHM)
-
-
-# ── Auth dependency ────────────────────────────────────────────────────────────
-
-def get_org_id(
-    credentials: HTTPAuthorizationCredentials = Depends(_bearer),
-    x_api_key:   str | None = Header(None),
-) -> str:
-    """
-    Resolves org_id from:
-      1. Bearer JWT token  (Authorization: Bearer <token>)
-      2. X-Api-Key header  (X-Api-Key: <token>)
-      3. DEBUG fallback    (org_id = "default", only when DEBUG=true)
-    """
-    token = None
-    if credentials:
-        token = credentials.credentials
-    elif x_api_key:
-        token = x_api_key
-
-    if not token:
-        if Config.DEBUG:
-            return "default"
-        raise HTTPException(status_code=401, detail="Authentication required.")
-
-    try:
-        payload = jwt.decode(
-            token,
-            Config.JWT_SECRET,
-            algorithms=[Config.JWT_ALGORITHM],
-        )
-        return payload.get("org_id") or payload.get("sub", "default")
-
-    except jwt.ExpiredSignatureError:
-        raise HTTPException(status_code=401, detail="Token expired.")
-    except jwt.InvalidTokenError:
-        raise HTTPException(status_code=401, detail="Invalid token.")
 
 
 # ── Lifespan ───────────────────────────────────────────────────────────────────
@@ -93,11 +43,24 @@ def get_org_id(
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info(f"Starting {Config.PROJECT_NAME} v{Config.VERSION}")
+    
+    # Initialize MongoDB Collections & Indexes
+    init_db()
+    
+    # Verify local LLM accessibility
+    from app.llm_layer import is_ollama_running
+    if not is_ollama_running():
+        logger.warning(
+            f"Ollama server not detected! "
+            f"LLM generation will fallback to raw context. "
+            f"Ensure `ollama serve` is running."
+        )
+        
     yield
     logger.info("Shutting down.")
 
 
-# ── App ────────────────────────────────────────────────────────────────────────
+# ── App Initialization ─────────────────────────────────────────────────────────
 
 app = FastAPI(
     title=Config.PROJECT_NAME,
@@ -105,55 +68,35 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# Configured for Vite React frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # tighten to your frontend domain in production
+    allow_origins=["http://localhost:5173", "http://localhost:3000"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Attach external routers (handles /api/auth/login and /api/auth/oauth/callback)
+app.include_router(auth_router, prefix="/api/auth", tags=["Auth"])
+
 
 # ── Pydantic schemas ───────────────────────────────────────────────────────────
-
-class LoginRequest(BaseModel):
-    org_id: str
-    secret: str   # validate against hashed secret in DB for production
-
 
 class SearchQuery(BaseModel):
     query: str
     k:     int = Config.DEFAULT_K
 
 
-# ── Auth routes ────────────────────────────────────────────────────────────────
-
-@app.post("/auth/login", tags=["auth"])
-async def login(req: LoginRequest):
-    """
-    Issues a JWT for the given org_id.
-    TODO: validate req.secret against a real database before production.
-    """
-    if not req.org_id or len(req.org_id) > 64:
-        raise HTTPException(status_code=400, detail="Invalid org_id.")
-
-    # Create the org's storage and index directories on first login
-    os.makedirs(Config.upload_dir(req.org_id), exist_ok=True)
-    os.makedirs(os.path.join(Config.INDEX_DIR, req.org_id), exist_ok=True)
-
-    token = create_token(req.org_id)
-    return {
-        "access_token": token,
-        "token_type":   "bearer",
-        "org_id":       req.org_id,
-        "expires_in":   Config.JWT_EXPIRE_MINS * 60,
-    }
-
-
-# ── Health ─────────────────────────────────────────────────────────────────────
+# ── Health & Stats ─────────────────────────────────────────────────────────────
 
 @app.get("/api/health", tags=["system"])
 async def health():
     return {"status": "ok", "version": Config.VERSION}
+
+@app.get("/api/stats", tags=["system"])
+async def stats(org_id: str = Depends(get_current_tenant)):
+    return {**get_engine(org_id).stats, "org_id": org_id}
 
 
 # ── Upload ─────────────────────────────────────────────────────────────────────
@@ -161,13 +104,10 @@ async def health():
 @app.post("/api/upload", tags=["documents"])
 async def upload(
     files:  list[UploadFile] = File(...),
-    org_id: str              = Depends(get_org_id),
+    org_id: str              = Depends(get_current_tenant),
 ):
     """
     Upload and index PDF or DOCX files for the authenticated tenant.
-    Files are stored at storage/{org_id}/{filename}.
-    Ingestion is synchronous here — swap engine.ingest() for a Celery
-    task call when you need fully async processing.
     """
     upload_dir = Path(Config.upload_dir(org_id))
     upload_dir.mkdir(parents=True, exist_ok=True)
@@ -214,6 +154,13 @@ async def upload(
         stats = engine.ingest(pages)
         invalidate_db(org_id)   # force registry reload after index update
 
+        # ── CRITICAL FIX: Safe batch handling (continue instead of raise) ──
+        if stats.get("chunks", 0) == 0:
+            results.append({"file": f.filename, "error": "Text extracted, but no valid chunks generated."})
+            dest.unlink(missing_ok=True)
+            continue
+        # ───────────────────────────────────────────────────────────────────
+
         results.append({
             "file":      f.filename,
             "doc_id":    doc_id,
@@ -223,10 +170,7 @@ async def upload(
             "org_id":    org_id,
         })
 
-        logger.info(
-            f"Uploaded and indexed '{f.filename}'",
-            extra={"org_id": org_id, "doc_id": doc_id},
-        )
+        logger.info(f"Uploaded and indexed '{f.filename}'", extra={"org_id": org_id, "doc_id": doc_id})
 
     return {"files": results, "index": engine.stats}
 
@@ -236,7 +180,7 @@ async def upload(
 @app.post("/api/search", tags=["search"])
 async def search(
     req:    SearchQuery,
-    org_id: str = Depends(get_org_id),
+    org_id: str = Depends(get_current_tenant),
 ):
     """
     Tenant-scoped RAG query.
@@ -251,20 +195,25 @@ async def search(
 
     # Prompt injection guard
     if detect_injection(query):
-        logger.warning(
-            "Injection attempt blocked",
-            extra={"org_id": org_id, "query": query[:80]},
-        )
-        raise HTTPException(
-            status_code=400,
-            detail="Query contains disallowed instructions.",
-        )
+        logger.warning("Injection attempt blocked", extra={"org_id": org_id, "query": query[:80]})
+        raise HTTPException(status_code=400, detail="Query contains disallowed instructions.")
 
     engine = get_engine(org_id)
+    if not engine.ready:
+        raise HTTPException(status_code=400, detail="No documents indexed for this organization yet.")
+
     result = engine.query(query, req.k)
 
     if "error" in result:
         raise HTTPException(status_code=503, detail=result["error"])
+
+    # Log query to MongoDB for Dashboard History
+    if history_collection is not None:
+        history_collection.insert_one({
+            "org_id": org_id, 
+            "query": query, 
+            "results": len(result.get("results", []))
+        })
 
     return result
 
@@ -272,11 +221,11 @@ async def search(
 # ── Documents ──────────────────────────────────────────────────────────────────
 
 @app.get("/api/documents", tags=["documents"])
-async def documents(org_id: str = Depends(get_org_id)):
+async def documents(org_id: str = Depends(get_current_tenant)):
     """List all indexed documents for the authenticated tenant."""
     engine = get_engine(org_id)
 
-    if not engine.ready:
+    if not engine.ready or not engine.db.metadata:
         return {"documents": [], "org_id": org_id}
 
     doc_stats: dict[str, dict] = {}
@@ -295,6 +244,7 @@ async def documents(org_id: str = Depends(get_org_id)):
         }
         for d in doc_stats.values()
     ]
+    
     return {
         "documents": sorted(docs, key=lambda x: x["name"]),
         "org_id":    org_id,
@@ -304,7 +254,7 @@ async def documents(org_id: str = Depends(get_org_id)):
 @app.delete("/api/documents/{name}", tags=["documents"])
 async def delete_document(
     name:   str,
-    org_id: str = Depends(get_org_id),
+    org_id: str = Depends(get_current_tenant),
 ):
     """
     Remove a document from the tenant's index and delete its file from storage.
@@ -359,13 +309,6 @@ async def delete_document(
         "org_id":  org_id,
         "index":   engine.stats,
     }
-
-
-# ── Stats ──────────────────────────────────────────────────────────────────────
-
-@app.get("/api/stats", tags=["system"])
-async def stats(org_id: str = Depends(get_org_id)):
-    return {**get_engine(org_id).stats, "org_id": org_id}
 
 
 # ── Entry point ────────────────────────────────────────────────────────────────

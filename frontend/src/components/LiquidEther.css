@@ -1,0 +1,17 @@
+/* src/components/LiquidEther.css */
+.liquid-ether-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none; /* Crucial: ensures you can click buttons and inputs through the canvas */
+  overflow: hidden;
+  background-color: #091413; /* Deep surface tint matching your palette */
+}
+
+.liquid-ether-container canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

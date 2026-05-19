@@ -19,28 +19,21 @@ class SearchEngine:
         self.db = get_db(org_id)
         self.ready = self.db.index is not None
         
-        # 1. Thread-safe custom caching (Replaces leaky @lru_cache)
         self._query_cache = {}
         self._embed_cache = {} 
         self._cache_lock = threading.Lock() 
         self.MAX_CACHE_SIZE = getattr(Config, 'MAX_CACHE_SIZE', 1000)
         
-        # 2. Hardware Acceleration Detection (Includes Mac M1/M2/M3)
-        if torch.cuda.is_available():
-            self.device = "cuda"
-        elif torch.backends.mps.is_available():
-            self.device = "mps"
-        else:
-            self.device = "cpu"
+        if torch.cuda.is_available(): self.device = "cuda"
+        elif torch.backends.mps.is_available(): self.device = "mps"
+        else: self.device = "cpu"
             
         logger.info(f"Loading models onto {self.device.upper()} for org '{org_id}'...")
 
         self.model = SentenceTransformer(Config.MODEL_NAME, device=self.device)
-        
         self.use_reranker = getattr(Config, 'USE_RERANKER', True)
         if self.use_reranker:
-            try:
-                self.reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2", device=self.device, max_length=512)
+            try: self.reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2", device=self.device, max_length=512)
             except Exception as e:
                 logger.warning(f"Reranker initialization failed: {e}. Falling back.")
                 self.reranker = None
@@ -74,8 +67,7 @@ class SearchEngine:
 
     def _get_embedding(self, text):
         with self._cache_lock:
-            if text in self._embed_cache:
-                return self._embed_cache[text]
+            if text in self._embed_cache: return self._embed_cache[text]
                 
         vector = self.model.encode([text], convert_to_numpy=True)
         faiss.normalize_L2(vector)
@@ -84,17 +76,13 @@ class SearchEngine:
             if len(self._embed_cache) >= self.MAX_CACHE_SIZE:
                 self._embed_cache.pop(next(iter(self._embed_cache)))
             self._embed_cache[text] = vector
-            
         return vector
 
     def _apply_mmr(self, candidates, query_vec, k, lambda_param=0.7):
-        # 3. Prevent MMR crash when candidates count is too low
-        if not candidates or len(candidates) <= 1: 
-            return candidates[:k]
+        if not candidates or len(candidates) <= 1: return candidates[:k]
         
         selected = []
         cand_embeds = np.vstack([self._get_embedding(c["text"]) for c in candidates])
-            
         scores_q = np.dot(cand_embeds, query_vec.T).flatten()
         remaining_indices = list(range(len(candidates)))
         
@@ -108,7 +96,6 @@ class SearchEngine:
                 sim_q = scores_q[idx]
                 sim_selected = np.max([np.dot(cand_embeds[idx], cand_embeds[s_idx]) for s_idx in selected])
                 mmr_scores.append(lambda_param * sim_q - (1 - lambda_param) * sim_selected)
-            
             best_idx = remaining_indices[np.argmax(mmr_scores)]
             selected.append(best_idx)
             remaining_indices.remove(best_idx)
@@ -168,8 +155,7 @@ class SearchEngine:
             logits = np.array(self.reranker.predict(pairs))
             probs = 1 / (1 + np.exp(-logits / 2.0))
             ranked = sorted(zip(probs, unique_cands), key=lambda x: x[0], reverse=True)
-            
-            threshold = getattr(Config, 'CALIBRATION_THRESHOLD', 0.30)
+            threshold = getattr(Config, 'CALIBRATION_THRESHOLD', 0.0)
             filtered = [ {**c, "score": round(float(p), 4)} for p, c in ranked if p >= threshold ]
         else:
             filtered = unique_cands[:k]
@@ -179,12 +165,7 @@ class SearchEngine:
 
         t0_llm = time.perf_counter()
         query_type = "comparison" if len(detected_entities) > 1 else "general"
-        llm_resp = generate_answer(
-            query=text, 
-            chunks=final_results, 
-            query_type=query_type, 
-            entities=detected_entities
-        )
+        llm_resp = generate_answer(query=text, chunks=final_results, query_type=query_type, entities=detected_entities)
         latencies["llm"] = round((time.perf_counter() - t0_llm) * 1000, 2)
         latencies["total"] = round((time.perf_counter() - t_start) * 1000, 2)
 
@@ -222,10 +203,8 @@ class SearchEngine:
         embeddings = self.model.encode([c["text"] for c in chunks], batch_size=Config.BATCH_SIZE, convert_to_numpy=True)
         faiss.normalize_L2(embeddings)
 
-        if self.db.index is None: 
-            self.db.build(embeddings, chunks)
-        else: 
-            self.db.add(embeddings, chunks)
+        if self.db.index is None: self.db.build(embeddings, chunks)
+        else: self.db.add(embeddings, chunks)
 
         self.ready = True
         return {"chunks": len(chunks), "ingest_ms": round((time.perf_counter() - t0) * 1000, 2)}
@@ -234,16 +213,13 @@ class SearchEngine:
     def stats(self): 
         return {**self.db.stats, "model": Config.MODEL_NAME, "org_id": self.org_id}
 
-
 _engine_registry: dict[str, SearchEngine] = {}
 _engine_lock = threading.Lock()
 
 def get_engine(org_id: str) -> SearchEngine:
     with _engine_lock:
-        if org_id not in _engine_registry:
-            _engine_registry[org_id] = SearchEngine(org_id)
+        if org_id not in _engine_registry: _engine_registry[org_id] = SearchEngine(org_id)
         return _engine_registry[org_id]
 
 def invalidate_engine(org_id: str) -> None:
-    with _engine_lock:
-        _engine_registry.pop(org_id, None)
+    with _engine_lock: _engine_registry.pop(org_id, None)

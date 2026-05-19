@@ -161,9 +161,10 @@ class VectorDB:
             bm25_scores = np.array(self.bm25.get_scores(tokens))
 
             if valid_ids:
-                mask = np.ones(len(bm25_scores), dtype=bool)
-                mask[list(valid_ids)] = False
-                bm25_scores[mask] = 0.0
+                # ── CRITICAL FIX: Cleaner boolean logic implementation ──
+                mask = np.zeros(len(bm25_scores), dtype=bool)
+                mask[list(valid_ids)] = True
+                bm25_scores[~mask] = 0.0
 
             candidate_k = k * 4
             if len(bm25_scores) > candidate_k:
