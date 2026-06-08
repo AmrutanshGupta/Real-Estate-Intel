@@ -44,7 +44,6 @@ def _build(name: str) -> logging.Logger:
 logger = _build(Config.PROJECT_NAME)
 
 
-# ── Convenience helpers ────────────────────────────────────────────────────────
 
 def log_query(org_id: str, query: str, latency_ms: float, cache_hit: bool) -> None:
     logger.info(

@@ -20,9 +20,6 @@ from app.llm_layer import generate_answer
 # Lightweight named-entity helpers (no spaCy dependency)
 # ---------------------------------------------------------------------------
 
-# Heuristic: a "name token" is a capitalised word of ≥2 chars that is NOT a
-# common English stopword.  Good enough for proper-noun extraction from short
-# real-estate queries without pulling in a 40 MB NER model.
 _STOPWORDS = frozenset({
     "who", "what", "where", "when", "how", "is", "are", "was", "were",
     "the", "a", "an", "and", "or", "of", "in", "on", "at", "to", "for",
@@ -33,31 +30,22 @@ _STOPWORDS = frozenset({
 })
 
 def _extract_name_tokens(text: str) -> set[str]:
-    """
-    Return capitalised tokens that look like proper nouns.
-    Used for entity-consistency gating — not for full NER.
-    """
+
     tokens = re.findall(r'\b[A-Z][a-z]{1,}\b', text)
     return {t.lower() for t in tokens if t.lower() not in _STOPWORDS}
 
 
 def _entity_consistency_penalty(query: str, chunk_text: str, score: float) -> float:
-    """
-    Post-rerank gate: if the query contains capitalised name tokens that are
-    completely absent from the chunk, apply a heavy penalty.
 
-    This is the *last* line of defence — only fires when the reranker already
-    let a wrong chunk through.
-    """
+
     name_tokens = _extract_name_tokens(query)
     if not name_tokens:
-        return score          # query has no proper nouns → nothing to check
+        return score         
 
     chunk_lower = chunk_text.lower()
     if any(tok in chunk_lower for tok in name_tokens):
-        return score          # at least one name token present → chunk is legit
+        return score         
 
-    # Zero name tokens matched → almost certainly the wrong person/project
     return score * 0.25
 
 

@@ -22,7 +22,7 @@ def _split_sentences(text: str) -> list[str]:
 def chunk_text(
     pages: list[dict],
     similarity_threshold: float = 0.45,
-    encode_fn=None,          # callable(list[str]) -> np.ndarray  — injected by SearchEngine
+    encode_fn=None,         
 ) -> list[dict]:
     """
     Semantically chunk pages into variable-length chunks.
@@ -37,7 +37,6 @@ def chunk_text(
                           lightweight model only if None is passed (testing only).
     """
     if encode_fn is None:
-        # Lazy fallback — only reached in unit tests / standalone runs
         from sentence_transformers import SentenceTransformer
         _fallback = SentenceTransformer("all-MiniLM-L6-v2", device="cpu")
         encode_fn = lambda sentences: _fallback.encode(sentences, convert_to_numpy=True)
@@ -62,30 +61,24 @@ def chunk_text(
             "doc_id":    page.get("doc_id", ""),
         }
 
-        # ── Edge case: single sentence on the page ──────────────────────────
         if len(sentences) == 1:
             chunks.append({**base, "text": sentences[0], "chunk_index": chunk_index})
             chunk_index += 1
             continue
 
-        # ── Embed all sentences in one batch (cheap, uses engine's model) ───
         embeddings = encode_fn(sentences)
 
-        # L2-normalise once so dot product == cosine similarity
         norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
         norms = np.where(norms == 0, 1.0, norms)          # avoid div-by-zero
         embeddings = embeddings / norms
 
-        # ── Adjacent-sentence cosine similarities ───────────────────────────
         similarities = (embeddings[:-1] * embeddings[1:]).sum(axis=1)  # vectorised
 
-        # ── Group into chunks on topic-boundary ─────────────────────────────
         current: list[str] = [sentences[0]]
 
         for i, sim in enumerate(similarities):
             next_sentence = sentences[i + 1]
             if sim < similarity_threshold:
-                # Topic changed → flush current chunk
                 chunks.append({
                     **base,
                     "text":        " ".join(current),
@@ -96,7 +89,6 @@ def chunk_text(
 
             current.append(next_sentence)
 
-        # Flush trailing sentences
         if current:
             chunks.append({
                 **base,

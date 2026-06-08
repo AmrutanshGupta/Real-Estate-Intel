@@ -8,7 +8,6 @@ from app.config import Config
 from app.logger import logger
 
 
-# Pre-compile regex patterns for performance
 _RE_ARTIFACTS = re.compile(r'[#\\|]{2,}')
 _RE_NULLS     = re.compile(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]')
 _RE_SPACES    = re.compile(r'\s+')

@@ -13,7 +13,6 @@ from app.logger import logger
 security = HTTPBearer()
 auth_router = APIRouter()
 
-# ── Pydantic Models ──
 class LoginRequest(BaseModel):
     org_id: str
     password: str
@@ -23,7 +22,6 @@ class OAuthLoginRequest(BaseModel):
     access_token: str  
     org_id: str        
 
-# ── Core JWT Logic ──
 def create_access_token(data: dict, expires_delta: timedelta = None) -> str:
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + (expires_delta or timedelta(minutes=Config.JWT_EXPIRE_MINS))
@@ -43,20 +41,17 @@ def get_current_tenant(credentials: HTTPAuthorizationCredentials = Depends(secur
     except jwt.PyJWTError:
         raise HTTPException(status_code=401, detail="Could not validate credentials")
 
-# ── Standard Login Route ──
 @auth_router.post("/login")
 async def login(req: LoginRequest):
     logger.info(f"Tenant authenticated via standard login: {req.org_id}")
     access_token = create_access_token(data={"sub": req.org_id})
     return {"access_token": access_token, "token_type": "bearer"}
 
-# ── Async Fetch Helper ──
 def _fetch_oauth_profile(req: urllib.request.Request) -> dict:
     """Synchronous network call isolated for threading."""
     with urllib.request.urlopen(req, timeout=10) as response:
         return json.loads(response.read().decode("utf-8"))
 
-# ── OAuth Callback Route ──
 @auth_router.post("/oauth/callback")
 async def oauth_callback(req: OAuthLoginRequest):
     user_email = None
@@ -65,7 +60,6 @@ async def oauth_callback(req: OAuthLoginRequest):
         if req.provider == "google":
             url = f"{Config.GOOGLE_USERINFO_URL}?access_token={req.access_token}"
             request = urllib.request.Request(url)
-            # OPTIMIZATION: Offload blocking network call to thread
             profile = await asyncio.to_thread(_fetch_oauth_profile, request)
             user_email = profile.get("email")
                 
@@ -77,7 +71,6 @@ async def oauth_callback(req: OAuthLoginRequest):
                     "User-Agent": Config.PROJECT_NAME
                 }
             )
-            # OPTIMIZATION: Offload blocking network call to thread
             profile = await asyncio.to_thread(_fetch_oauth_profile, request)
             user_email = profile.get("email") or f"{profile.get('login')}@github.sys"
         else:
